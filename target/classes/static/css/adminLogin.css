@@ -1,0 +1,9 @@
+.invalid-feedback {
+    margin: 5px 0 0 10px;
+    font-size: 0.7rem;
+    color: var(--default-red);
+}
+
+.was-valid {
+    display: none;
+}
