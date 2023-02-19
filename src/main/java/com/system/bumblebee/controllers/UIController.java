@@ -21,4 +21,8 @@ public class UIController {
     public String getCustomerRegister() {
         return "CustomerRegister";
     }
+    @GetMapping(value = "/CustomerDetails")
+    public String getCustomerDetails() {
+        return "CustomerDetails";
+    }
 }
