@@ -1,10 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-  <h1>Hello World</h1>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Bumble-Bee | Admin Center</title>
+    <link
+      href="../static/css/navigation.css"
+      rel="stylesheet"
+      th:href="@{/css/navigation.css}"
+    />
+    <link
+      href="../static/css/global.css"
+      rel="stylesheet"
+      th:href="@{/css/global.css}"
+    />
+    <link
+      href="../static/css/adminCenter.css"
+      rel="stylesheet"
+      th:href="@{/css/adminCenter.css}"
+    />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul id="logo">
+          <li><a href="http://localhost:8080/">Bumble-Bee</a></li>
+        </ul>
+        <ul id="userControl">
+          <li><a href="http://localhost:8080/AdminLogin">Login</a></li>
+          <li><a href="http://localhost:8080/CustomerRegister">Register</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section>
+        <h1>Admin Center</h1>
+      </section>
+      <section>
+        <div class="card">
+          <a href="#">View Customer Details</a>
+        </div>
+        <div class="card">
+          <a href="#">View Product Details</a>
+        </div>
+      </section>
+    </main>
+  </body>
 </html>
