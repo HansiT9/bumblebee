@@ -1,10 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Bumble-Bee | Customer Register</title>
+    <link
+      href="../static/css/global.css"
+      rel="stylesheet"
+      th:href="@{/css/global.css}"
+    />
+    <link
+      href="../static/css/customerRegister.css"
+      rel="stylesheet"
+      th:href="@{/css/customerRegister.css}"
+    />
+    <link
+      href="../static/css/loginRegisterCommon.css"
+      rel="stylesheet"
+      th:href="@{/css/loginRegisterCommon.css}"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <main>
+      <section class="logoSide">
+        <h1>Bumble-Bee</h1>
+        <p>
+          Shop now and pay later with just a few clicks using our convenient
+          online buy first pay later Mobile Application.
+        </p>
+      </section>
+      <section class="formSide">
+        <form>
+          <h3>Register</h3>
+          <!-- switch start -->
+          <div class="switchLan" id="toggle">
+            <label class="switch_wrapper" id="toggleLab">
+              <input checked disabled id="switchOption" type="checkbox" />
+              <span class="switch_slider"></span>
+              <div></div>
+            </label>
+          </div>
+          <!-- switch End -->
+          <div class="form-group">
+            <label for="fullName">Customer Full Name:</label>
+            <input
+              class="form-control"
+              id="fullName"
+              placeholder="Enter your full name"
+              required
+              type="text"
+            />
+          </div>
+          <div class="form-group">
+            <label for="dob">Customer Date of Birth:</label>
+            <input
+              class="form-control"
+              id="dob"
+              pattern="^(19|20)\d{2}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$"
+              placeholder="yyyy-mm-dd"
+              required
+              type="text"
+            />
+          </div>
+          <div class="form-group">
+            <label for="email">Customer Email:</label>
+            <input
+              class="form-control"
+              id="email"
+              pattern="/^[^\s@]+@[^\s@]+\.[^\s@]+$/"
+              placeholder="example@mail.com"
+              required
+              type="email"
+            />
+          </div>
+          <div class="form-group">
+            <label for="password">Customer Password:</label>
+            <input
+              class="form-control"
+              id="password"
+              placeholder="Should have at least 8 characters"
+              required
+              type="password"
+            />
+          </div>
+          <button class="btnSubmit" type="submit">Register</button>
+        </form>
+        <p><i class="fa">&#xf06a;</i>Web view only allows customers to register to the system</p>
+      </section>
+    </main>
+  </body>
 </html>

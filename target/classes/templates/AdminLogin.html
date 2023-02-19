@@ -13,6 +13,15 @@
       rel="stylesheet"
       th:href="@{/css/adminLogin.css}"
     />
+    <link
+      href="../static/css/loginRegisterCommon.css"
+      rel="stylesheet"
+      th:href="@{/css/loginRegisterCommon.css}"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <main>
@@ -29,7 +38,7 @@
           <!-- switch start -->
           <div class="switchLan" id="toggle">
             <label class="switch_wrapper" id="toggleLab">
-              <input id="switchOption" type="checkbox" />
+              <input disabled id="switchOption" type="checkbox" />
               <span class="switch_slider"></span>
               <div></div>
             </label>
@@ -44,9 +53,7 @@
               required
               type="email"
             />
-            <div class="invalid-feedback">
-              Please enter a valid email address.
-            </div>
+            <!--            <div class="invalid-feedback">Please enter a valid email address.</div>-->
           </div>
           <div class="form-group">
             <label for="pwd">Admin Password:</label>
@@ -57,10 +64,14 @@
               required
               type="password"
             />
-            <div class="invalid-feedback">Please enter a password.</div>
+            <!--            <div class="invalid-feedback">Please enter a password.</div>-->
           </div>
           <button class="btnSubmit" type="submit">Login</button>
         </form>
+        <p>
+          <i class="fa">&#xf06a;</i>Web view only allows Admin to Log in to the
+          system
+        </p>
       </section>
     </main>
   </body>
