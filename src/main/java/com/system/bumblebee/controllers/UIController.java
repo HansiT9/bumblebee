@@ -5,7 +5,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class UIController {
-
+    @GetMapping(value = "/")
+    public String getHome() {
+        return "Home";
+    }
     @GetMapping(value = "/AdminLogin")
     public String getAdminLogin() {
         return "AdminLogin";

@@ -1,0 +1,39 @@
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+section {
+    display: flex;
+    justify-content: center;
+    flex: 1;
+    height: 100%;
+    background-image: url("data:image/svg+xml;utf8,<svg id='10015.io' viewBox='0 0 480 480' xmlns='http://www.w3.org/2000/svg'><path fill='%23f87060' d='M404.5,294.5Q370,349,323.5,400.5Q277,452,202,444Q127,436,113,363.5Q99,291,58,225Q17,159,88,129.5Q159,100,211,104.5Q263,109,333.5,106Q404,103,421.5,171.5Q439,240,404.5,294.5Z' /></svg>");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.content {
+    text-align: center;
+    z-index: 1;
+    padding: 50px;
+    color: white;
+    font-size: 2rem;
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+}
+
+.content p {
+    margin-top: 5%;
+    font-weight: 300;
+    font-size: 1rem;
+}
+
+#appName {
+    font-family: "Dancing Script", cursive;
+    color: var(--default-yello);
+    margin-left: 10px;
+}
