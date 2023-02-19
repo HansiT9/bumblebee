@@ -1,0 +1,46 @@
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+section:nth-child(1) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    font-size: 1.5rem;
+    height: 10%;
+}
+
+section:nth-child(2) {
+    flex:1;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.detailsContainer__before, .detailsContainer__after {
+    width: 90%;
+    font-size: 1.2em;
+    margin-left: 5%;
+    padding: 20px 10px;
+    border-radius: 20px;
+    border: 3px solid var(--default-yello);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.detailsContainer__before button {
+    cursor: pointer;
+    padding: 8px 15px;
+    border-radius: 10px;
+    border: none;
+    font-size: 0.8em;
+    color: var(--default-yello);
+    background-color: transparent;
+}
+
+

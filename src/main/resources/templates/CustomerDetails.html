@@ -1,10 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Bumble-Bee | Customer Details</title>
+    <link
+      href="../static/css/navigation.css"
+      rel="stylesheet"
+      th:href="@{/css/navigation.css}"
+    />
+    <link
+      href="../static/css/global.css"
+      rel="stylesheet"
+      th:href="@{/css/global.css}"
+    />
+    <link
+      href="../static/css/customerDetails.css"
+      rel="stylesheet"
+      th:href="@{/css/customerDetails.css}"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul id="logo">
+          <li><a href="http://localhost:8080/">Bumble-Bee</a></li>
+        </ul>
+        <ul id="userControl">
+          <li><a href="http://localhost:8080/AdminLogin">Login</a></li>
+          <li><a href="http://localhost:8080/CustomerRegister">Register</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section>
+        <h1>Customer Details</h1>
+      </section>
+      <section>
+        <div class="detailsContainer">
+          <div class="detailsContainer__before" id="detailsContainer__before">
+            <h3>Full Name : Example User</h3>
+            <button id="s" onclick="hide()">More info &#187;</button>
+          </div>
+          <div class="detailsContainer__after" style="display: none">
+            <div class="left">
+              <h3>Full Name : Example User</h3>
+              <h3>Customer ID : 0001</h3>
+              <h3>DOB : yyyy-mm-dd</h3>
+              <h3>Instalment plan : 03 months</h3>
+            </div>
+            <div class="middle">
+              <h3>Loan Balance : 24000</h3>
+            </div>
+            <div class="right">
+              <h3>Used Amount : 10000</h3>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script>
+      function hide() {
+        $(".detailsContainer__before").hide();
+        $(".detailsContainer__after").show()
+      }
+    </script>
+  </body>
 </html>
