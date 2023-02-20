@@ -22,8 +22,9 @@ section:nth-child(2) {
 
 .detailsContainer__before, .detailsContainer__after {
     width: 90%;
-    font-size: 1.2em;
+    font-size: 1em;
     margin-left: 5%;
+    margin-top: 1%;
     padding: 20px 10px;
     border-radius: 20px;
     border: 3px solid var(--default-yello);
@@ -33,11 +34,10 @@ section:nth-child(2) {
     justify-content: space-between;
 }
 
-.detailsContainer__before button {
+.detailsContainer__before a {
     cursor: pointer;
     padding: 8px 15px;
     border-radius: 10px;
-    border: none;
     font-size: 0.8em;
     color: var(--default-yello);
     background-color: transparent;
