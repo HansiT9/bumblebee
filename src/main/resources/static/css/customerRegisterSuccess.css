@@ -1,0 +1,26 @@
+main {
+    flex: 1;
+    display: flex;
+    background-image: url("data:image/svg+xml;utf8,<svg id='10015.io' viewBox='0 0 480 480' xmlns='http://www.w3.org/2000/svg'><path fill='%23f2de46' d='M404.5,294.5Q370,349,323.5,400.5Q277,452,202,444Q127,436,113,363.5Q99,291,58,225Q17,159,88,129.5Q159,100,211,104.5Q263,109,333.5,106Q404,103,421.5,171.5Q439,240,404.5,294.5Z' /></svg>");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+main section {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.subSec {
+    display: flex;
+    align-items: center;
+    margin-left: 30%;
+}
+#logoText {
+    font-family: "Dancing Script", cursive;
+    color: var(--default-yello);
+    font-size: 4rem;
+    margin-left: 10px;
+}
