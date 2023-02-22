@@ -2,6 +2,7 @@ package com.system.bumblebee.controllers;
 
 import com.system.bumblebee.dto.Admin;
 import com.system.bumblebee.dto.Customer;
+import com.system.bumblebee.entity.AdminEntity;
 import com.system.bumblebee.services.AuthService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,13 +23,13 @@ public class AuthController {
 
     @PostMapping("/admin/login")
     public ResponseEntity<?> loginAdmin(@RequestBody Admin admin) {
-        boolean authenticated = authService.authenticateAdmin(admin);
+        AdminEntity adminEntity = authService.authenticateAdmin(admin);
 
-        if (authenticated) {
-            return ResponseEntity.status(HttpStatus.OK).body("Login Successful!");
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
-        }
+//        if (authenticated) {
+            return ResponseEntity.status(HttpStatus.OK).body(adminEntity);
+//        } else {
+//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
+//        }
     }
 
     @PostMapping("/customer/register")
