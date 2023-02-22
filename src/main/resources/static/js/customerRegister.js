@@ -19,8 +19,9 @@ $("#form-reg").submit(function (event) {
   })
     .done(function (data) {
       alert("Registration successful: " + data.status);
+      window.location.href = "http://localhost:8080/Registration-Success";
     })
     .fail(function (error) {
-      alert("Login failed: " + error.status);
+      alert("Registration failed: " + error.status);
     });
 });

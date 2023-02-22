@@ -15,6 +15,6 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public boolean registerCustomer(Customer customer) {
-        return false;
+        return true;
     }
 }

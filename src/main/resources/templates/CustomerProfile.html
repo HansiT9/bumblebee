@@ -14,10 +14,69 @@
       th:href="@{/css/global.css}"
     />
     <link
-      href="../static/css/customerDetails.css"
+      href="../static/css/customerProfile.css"
       rel="stylesheet"
       th:href="@{/css/customerProfile.css}"
     />
   </head>
-  <body></body>
+  <body>
+    <header>
+      <nav>
+        <ul id="logo">
+          <li><a href="http://localhost:8080/">Bumble-Bee</a></li>
+        </ul>
+        <ul id="userControl">
+          <li><a href="http://localhost:8080/AdminLogin">Login</a></li>
+          <li><a href="http://localhost:8080/CustomerRegister">Register</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section>
+        <div class="avatar"></div>
+        <div class="details">
+          <div class="detailSet">
+            <h3>Full Name</h3>
+            <h3>Example User</h3>
+          </div>
+          <div class="detailSet">
+            <h3>Date of Birth</h3>
+            <h3>yyyy-mm-dd</h3>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div class="detailCard">
+          <p>Customer Email:</p>
+          <div>
+            <h3><a href="mailto:abc@mail.com">abc@mail.com</a></h3>
+          </div>
+        </div>
+        <div class="detailCard">
+          <p>Loan Balance:</p>
+          <div>
+            <h3>Rs.10,000</h3>
+          </div>
+        </div>
+        <div class="detailCard">
+          <p>Used Amount:</p>
+          <div>
+            <h3>Rs.5,000</h3>
+          </div>
+        </div>
+        <div class="detailCard">
+          <p>Installment Plan:</p>
+          <div>
+            <h3>03 Months</h3>
+          </div>
+        </div>
+        <div class="detailCard">
+          <p>Installment Plan:</p>
+          <div>
+            <h3>03 Months</h3>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
 </html>
