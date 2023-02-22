@@ -29,4 +29,8 @@ public class UIController {
     public String getRegistrationSuccess() {
         return "CustomerRegSuccess";
     }
+    @GetMapping(value = "/CustomerProfile")
+    public String getCustomerProfile(){
+        return "CustomerProfile";
+    }
 }
