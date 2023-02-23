@@ -15,9 +15,10 @@ $("#login-form").submit(function (event) {
   })
     .done(function (data) {
       console.log("Login successful:", data);
-      // window.location.href = "http://localhost:8080/AdminCenter";
+      window.location.href = "http://localhost:8080/AdminCenter";
     })
     .fail(function (error) {
       console.error("Login failed:", error);
+      alert("Email or Password incorrect. Please try again!");
     });
 });

@@ -2,8 +2,8 @@ package com.system.bumblebee.controllers;
 
 import com.system.bumblebee.dto.Admin;
 import com.system.bumblebee.dto.Customer;
-import com.system.bumblebee.entity.AdminEntity;
 import com.system.bumblebee.services.AuthService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,14 +22,15 @@ public class AuthController {
     }
 
     @PostMapping("/admin/login")
-    public ResponseEntity<?> loginAdmin(@RequestBody Admin admin) {
-        AdminEntity adminEntity = authService.authenticateAdmin(admin);
+    public ResponseEntity<?> loginAdmin(@RequestBody Admin admin, HttpSession session) {
+        boolean authenticated = authService.authenticateAdmin(admin);
 
-//        if (authenticated) {
-            return ResponseEntity.status(HttpStatus.OK).body(adminEntity);
-//        } else {
-//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
-//        }
+        if (authenticated) {
+            session.setAttribute("email", admin.getEmail());
+            return ResponseEntity.status(HttpStatus.OK).body(admin.getEmail());
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
+        }
     }
 
     @PostMapping("/customer/register")

@@ -1,5 +1,6 @@
 package com.system.bumblebee.controllers;
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -10,20 +11,38 @@ public class UIController {
         return "Home";
     }
     @GetMapping(value = "/AdminLogin")
-    public String getAdminLogin() {
-        return "AdminLogin";
+    public String getAdminLogin(HttpSession session) {
+        String sessionEmail = (String) session.getAttribute("email");
+
+        if (sessionEmail == null) {
+            return "AdminLogin";
+        } else {
+            return "redirect:/AdminCenter";
+        }
     }
     @GetMapping(value = "/AdminCenter")
-    public String getAdminCenter() {
+    public String getAdminCenter(HttpSession session) {
+        String sessionEmail = (String) session.getAttribute("email");
+
+        if (sessionEmail == null) {
+            return "redirect:/AdminLogin";
+        } else {
             return "AdminCenter";
         }
+    }
     @GetMapping(value = "/CustomerRegister")
     public String getCustomerRegister() {
         return "CustomerRegister";
     }
     @GetMapping(value = "/CustomerDetails")
-    public String getCustomerDetails() {
-        return "CustomerDetails";
+    public String getCustomerDetails(HttpSession session) {
+        String sessionEmail = (String) session.getAttribute("email");
+
+        if (sessionEmail == null) {
+            return "redirect:/AdminLogin";
+        } else {
+            return "CustomerDetails";
+        }
     }
     @GetMapping(value = "/Registration-Success")
     public String getRegistrationSuccess() {
