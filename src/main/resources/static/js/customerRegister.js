@@ -13,6 +13,7 @@ $(document).ready(function () {
           .done(function (data) {})
           .fail(function () {
             alert("Email Already Exist!");
+            $("#email").val("");
           });
       }
     }, 1000);
@@ -31,18 +32,18 @@ $("#form-reg").submit(function (event) {
     url: "http://localhost:8080/auth/customer/register",
     method: "POST",
     data: JSON.stringify({
-      fullName: fullName,
-      dob: dob,
-      email: email,
-      password: password,
+      customerFullName: fullName,
+      dob,
+      customerEmail: email,
+      password,
     }),
     contentType: "application/json",
   })
-    .done(function (data) {
-      alert("Registration successful: " + data.status);
+    .done(function () {
+      alert("Registration successful");
       window.location.href = "http://localhost:8080/Registration-Success";
     })
-    .fail(function (error) {
-      alert("Registration failed: " + error.status);
+    .fail(function () {
+      alert("Registration failed! Please try again");
     });
 });

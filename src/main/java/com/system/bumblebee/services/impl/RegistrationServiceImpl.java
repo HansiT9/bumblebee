@@ -4,6 +4,7 @@ import com.system.bumblebee.dto.Customer;
 import com.system.bumblebee.entity.CustomerEntity;
 import com.system.bumblebee.repositories.CustomerRepository;
 import com.system.bumblebee.services.RegistrationService;
+import com.system.bumblebee.util.PasswordEncrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,17 @@ public class RegistrationServiceImpl implements RegistrationService {
 
     @Override
     public boolean registerCustomer(Customer customer) {
-        return false;
+        CustomerEntity customerEntity = new CustomerEntity();
+
+        String hashedPassword = PasswordEncrypt.hashPassword(customer.getPassword());
+
+        customerEntity.setFullName(customer.getCustomerFullName());
+        customerEntity.setDob(customer.getDob());
+        customerEntity.setEmail(customer.getCustomerEmail());
+        customerEntity.setPassword(hashedPassword);
+
+        CustomerEntity savedCustomer = customerRepository.save(customerEntity);
+
+        return savedCustomer != null;
     }
 }

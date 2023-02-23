@@ -14,21 +14,21 @@ public class UIController {
     public String getAdminLogin(HttpSession session) {
         String sessionEmail = (String) session.getAttribute("email");
 
-        if (sessionEmail == null) {
+//        if (sessionEmail == null) {
             return "AdminLogin";
-        } else {
-            return "redirect:/AdminCenter";
-        }
+//        } else {
+//            return "redirect:/AdminCenter";
+//        }
     }
     @GetMapping(value = "/AdminCenter")
     public String getAdminCenter(HttpSession session) {
         String sessionEmail = (String) session.getAttribute("email");
 
-        if (sessionEmail == null) {
-            return "redirect:/AdminLogin";
-        } else {
+//        if (sessionEmail == null) {
+//            return "redirect:/AdminLogin";
+//        } else {
             return "AdminCenter";
-        }
+//        }
     }
     @GetMapping(value = "/CustomerRegister")
     public String getCustomerRegister() {
@@ -38,11 +38,11 @@ public class UIController {
     public String getCustomerDetails(HttpSession session) {
         String sessionEmail = (String) session.getAttribute("email");
 
-        if (sessionEmail == null) {
-            return "redirect:/AdminLogin";
-        } else {
+//        if (sessionEmail == null) {
+//            return "redirect:/AdminLogin";
+//        } else {
             return "CustomerDetails";
-        }
+//        }
     }
     @GetMapping(value = "/Registration-Success")
     public String getRegistrationSuccess() {

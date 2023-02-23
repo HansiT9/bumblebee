@@ -48,6 +48,7 @@ public class AuthController {
     public ResponseEntity<?> registerCustomer(@RequestBody Customer customer) {
         boolean registered = registerService.registerCustomer(customer);
 
+
         if (registered) {
             return ResponseEntity.status(HttpStatus.OK).body("Registration Successful!");
         } else {
