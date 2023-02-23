@@ -15,5 +15,8 @@ CREATE TABLE customer (
     fullName VARCHAR(255) NOT NULL,
     dob varchar(10) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
-    password VARCHAR(255) NOT NULL
+    password VARCHAR(255) NOT NULL,
+    loan_balance DECIMAL(10,2) DEFAULT 0,
+    used_amount DECIMAL(10,2) DEFAULT 0,
+    installment_plan VARCHAR(255) DEFAULT NULL
 );

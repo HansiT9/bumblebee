@@ -12,4 +12,5 @@ public class Customer {
     private String Dob;
     private String customerEmail;
     private String password;
+    private String installmentPlan;
 }

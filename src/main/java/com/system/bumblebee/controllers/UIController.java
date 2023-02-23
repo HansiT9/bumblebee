@@ -2,7 +2,9 @@ package com.system.bumblebee.controllers;
 
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class UIController {
@@ -49,7 +51,8 @@ public class UIController {
         return "CustomerRegSuccess";
     }
     @GetMapping(value = "/CustomerProfile")
-    public String getCustomerProfile(){
+    public String getCustomerProfile(@RequestParam Long cusID, Model model){
+        model.addAttribute("cusID", cusID);
         return "CustomerProfile";
     }
 }

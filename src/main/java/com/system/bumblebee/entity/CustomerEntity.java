@@ -18,4 +18,10 @@ public class CustomerEntity {
     private String email;
     @Column
     private String password;
+    @Column
+    private Double loanBalance;
+    @Column
+    private Double usedAmount;
+    @Column
+    private String installmentPlan;
 }

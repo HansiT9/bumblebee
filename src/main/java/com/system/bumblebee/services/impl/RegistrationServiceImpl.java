@@ -33,6 +33,15 @@ public class RegistrationServiceImpl implements RegistrationService {
         customerEntity.setDob(customer.getDob());
         customerEntity.setEmail(customer.getCustomerEmail());
         customerEntity.setPassword(hashedPassword);
+        customerEntity.setInstallmentPlan(customer.getInstallmentPlan());
+
+        if (!customer.getInstallmentPlan().equals("n/a")) {
+            customerEntity.setLoanBalance(15000.0);
+            customerEntity.setUsedAmount(0.0);
+        } else {
+            customerEntity.setLoanBalance(0.0);
+            customerEntity.setUsedAmount(0.0);
+        }
 
         CustomerEntity savedCustomer = customerRepository.save(customerEntity);
 
