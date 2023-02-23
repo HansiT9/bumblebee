@@ -1,3 +1,24 @@
+$(document).ready(function () {
+  var timeoutId;
+
+  $("#email").on("input", function () {
+    const email = $(this).val();
+    const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(function () {
+      if (email !== "" && pattern.test(email)) {
+        $.get("http://localhost:8080/auth/customer/validate", {
+          email: email,
+        })
+          .done(function (data) {})
+          .fail(function () {
+            alert("Email Already Exist!");
+          });
+      }
+    }, 1000);
+  });
+});
+
 $("#form-reg").submit(function (event) {
   event.preventDefault();
 
