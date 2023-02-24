@@ -19,6 +19,9 @@ $(document).ready(function () {
     }, 1000);
   });
 
+  // by default the installment plan is hidden
+  $("#installment").hide();
+
   // validate age of Customer
   let timeoutIdDob;
   $("#dob").on("input", function () {
@@ -72,7 +75,7 @@ $("#form-reg").submit(function (event) {
   })
     .done(function () {
       alert("Registration successful");
-      window.location.href = "http://localhost:8080/Registration-Success";
+      window.location.href = "http://localhost:8080/registration_success";
     })
     .fail(function () {
       alert("Registration failed! Please try again");

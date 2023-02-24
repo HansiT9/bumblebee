@@ -26,7 +26,6 @@ public class CustomerController {
     public ResponseEntity<?> fetchAllCustomers() {
 
         List<CustomerEntity> customerDetails = customerService.fetchAllCustomers();
-        System.out.println(customerDetails);
 
         if (!customerDetails.isEmpty()) {
             return ResponseEntity.status(HttpStatus.OK).body(customerDetails);

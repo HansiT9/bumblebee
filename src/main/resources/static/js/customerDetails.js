@@ -10,7 +10,7 @@ $(document).ready(function () {
           $(".detailsContainer").append(
             '<div class="detailsContainer__before"><h3>Full Name : ' +
               value.fullName +
-              '</h3><a href="http://localhost:8080/CustomerProfile?cusID=' +
+              '</h3><a href="http://localhost:8080/customer_profile?cusID=' +
               value.id +
               '">More info &#187;</a></div>'
           );

@@ -12,7 +12,7 @@ public class UIController {
     public String getHome() {
         return "Home";
     }
-    @GetMapping(value = "/AdminLogin")
+    @GetMapping(value = "/admin_login")
     public String getAdminLogin(HttpSession session) {
         String sessionEmail = (String) session.getAttribute("email");
 
@@ -22,7 +22,7 @@ public class UIController {
 //            return "redirect:/AdminCenter";
 //        }
     }
-    @GetMapping(value = "/AdminCenter")
+    @GetMapping(value = "/admin_center")
     public String getAdminCenter(HttpSession session) {
         String sessionEmail = (String) session.getAttribute("email");
 
@@ -32,11 +32,11 @@ public class UIController {
             return "AdminCenter";
 //        }
     }
-    @GetMapping(value = "/CustomerRegister")
+    @GetMapping(value = "/customer_register")
     public String getCustomerRegister() {
         return "CustomerRegister";
     }
-    @GetMapping(value = "/CustomerDetails")
+    @GetMapping(value = "/customer_details")
     public String getCustomerDetails(HttpSession session) {
         String sessionEmail = (String) session.getAttribute("email");
 
@@ -46,13 +46,17 @@ public class UIController {
             return "CustomerDetails";
 //        }
     }
-    @GetMapping(value = "/Registration-Success")
+    @GetMapping(value = "/registration_success")
     public String getRegistrationSuccess() {
         return "CustomerRegSuccess";
     }
-    @GetMapping(value = "/CustomerProfile")
+    @GetMapping(value = "/customer_profile")
     public String getCustomerProfile(@RequestParam Long cusID, Model model){
         model.addAttribute("cusID", cusID);
         return "CustomerProfile";
+    }
+    @GetMapping(value = "/inventory_details")
+    public String getInventoryDetails() {
+        return "InventoryDetails";
     }
 }
