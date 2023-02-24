@@ -80,7 +80,7 @@ section:nth-child(2) {
 .addNewForm {
     width: 40%;
     height: 90%;
-    box-shadow: #f2de46 0 3px 8px;
+    /*box-shadow: #f2de46 0 3px 8px;*/
     border-radius: 5px;
     position: relative;
     left: 30%;

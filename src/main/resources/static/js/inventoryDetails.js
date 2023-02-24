@@ -4,14 +4,14 @@ $(document).ready(function () {
   // Attach a click event handler to the button
   $("#closeBtn").click(function () {
     // Hide the div element with a fade effect
-    $("#formView").slideUp();
+    $("#formView").fadeOut();
   });
 
   let nameLabel = $("#nameL");
   let urlLabel = $("#urlL");
 
   $("#newBrand").click(function () {
-    $("#formView").slideDown();
+    $("#formView").show();
     $("#pbn").hide();
     $("#pcn").hide();
     nameLabel.text("Brand Name:");
@@ -19,7 +19,7 @@ $(document).ready(function () {
   });
 
   $("#newCat").click(function () {
-    $("#formView").slideDown();
+    $("#formView").show();
     $("#pbn").hide();
     $("#pcn").hide();
     nameLabel.text("Category Name:");
@@ -27,7 +27,7 @@ $(document).ready(function () {
   });
 
   $("#newProd").click(function () {
-    $("#formView").slideDown();
+    $("#formView").show();
     $("#pbn").show();
     $("#pcn").show();
     nameLabel.text("Product Name:");
