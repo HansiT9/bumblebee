@@ -18,6 +18,11 @@
       rel="stylesheet"
       th:href="@{/css/inventoryDetails.css}"
     />
+    <link
+      href="../static/css/popupform.css"
+      rel="stylesheet"
+      th:href="@{/css/popupform.css}"
+    />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   </head>
   <body>
@@ -42,7 +47,7 @@
         <div class="subSection">
           <div class="description">
             <h3>Brands</h3>
-            <a href="#">view all</a>
+            <a href="http://localhost:8080/inventory_type?type=brands">view all</a>
           </div>
           <div class="createBtn">
             <button id="newBrand">Add new Brand</button>
@@ -51,7 +56,7 @@
         <div class="subSection">
           <div class="description">
             <h3>Category's</h3>
-            <a href="#">view all</a>
+            <a href="http://localhost:8080/inventory_type?type=categorys">view all</a>
           </div>
           <div class="createBtn">
             <button id="newCat">Add new Category</button>
@@ -60,7 +65,7 @@
         <div class="subSection">
           <div class="description">
             <h3>Products</h3>
-            <a href="#">view all</a>
+            <a href="http://localhost:8080/inventory_type?type=products">view all</a>
           </div>
           <div class="createBtn">
             <button id="newProd">Add new Product</button>

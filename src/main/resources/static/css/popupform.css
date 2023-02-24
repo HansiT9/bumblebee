@@ -1,0 +1,109 @@
+.popup {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(145, 145, 145, 0.79);
+    position: absolute;
+}
+
+.addNewForm {
+    width: 40%;
+    height: 90%;
+    /*box-shadow: #f2de46 0 3px 8px;*/
+    border-radius: 5px;
+    position: relative;
+    left: 30%;
+    top: 5%;
+    z-index: 1;
+    background: inherit;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.addNewForm:before {
+    content: "";
+    position: absolute;
+    background: inherit;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    box-shadow: inset 0 0 2000px rgba(255, 255, 255, .5);
+    filter: blur(10px);
+    margin: -20px;
+}
+
+.controls {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+}
+
+.controls button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 30px;
+    font-size: 20px;
+    font-weight: bolder;
+    color: var(--default-red);
+    background-color: transparent;
+    cursor: pointer;
+}
+
+/* form styles */
+
+form {
+    flex: 1;
+}
+
+form h3 {
+    font-size: 1.5rem;
+    text-align: center;
+    color: var(--default-blue);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    margin-left: 15%;
+    margin-top: 20px;
+}
+
+.form-group label {
+    font-weight: 700;
+    margin-bottom: 5px;
+    color: var(--default-blue);
+}
+
+.form-group input {
+    padding: 10px;
+    border-radius: 15px;
+    border: none;
+    outline: none;
+    font-weight: 600;
+}
+
+.btnSubmit {
+    width: 40%;
+    margin-left: 30%;
+    margin-top: 10%;
+    padding: 10px;
+    border-radius: 18px;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    color: var(--default-blue);
+    cursor: pointer;
+    transition: all 200ms ease;
+}
+
+.btnSubmit:hover {
+    color: var(--default-blue);
+    box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+}

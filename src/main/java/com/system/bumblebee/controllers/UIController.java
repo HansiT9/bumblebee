@@ -59,4 +59,9 @@ public class UIController {
     public String getInventoryDetails() {
         return "InventoryDetails";
     }
+    @GetMapping(value = "/inventory_type")
+    public String getInventoryType(@RequestParam String type, Model model) {
+        model.addAttribute("type", type);
+        return "InventoryType";
+    }
 }
