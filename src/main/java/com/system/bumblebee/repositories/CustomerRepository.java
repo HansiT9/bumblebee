@@ -13,6 +13,5 @@ public interface CustomerRepository extends JpaRepository<CustomerEntity, Long> 
     CustomerEntity findByEmail(String email);
     CustomerEntity save(CustomerEntity customer);
     List<CustomerEntity> findAll();
-
     Optional<CustomerEntity> findById(Long cusID);
 }
