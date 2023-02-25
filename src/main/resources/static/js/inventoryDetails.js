@@ -10,11 +10,13 @@ $(document).ready(function () {
   let nameLabel = $("#nameL");
   let urlLabel = $("#urlL");
   let nameInput = $("#name");
+  let q = $("#q");
 
   $("#newBrand").click(function () {
     $("#formView").show();
     $("#pbn").hide();
     $("#pcn").hide();
+    q.hide();
     nameLabel.text("Brand Name:");
     urlLabel.text("Brand Logo:");
     nameInput.attr("placeholder", "Enter brand name");
@@ -24,6 +26,7 @@ $(document).ready(function () {
     $("#formView").show();
     $("#pbn").hide();
     $("#pcn").hide();
+    q.hide();
     nameLabel.text("Category Name:");
     urlLabel.text("Category Logo:");
     nameInput.attr("placeholder", "Enter category name");
@@ -31,6 +34,7 @@ $(document).ready(function () {
 
   $("#newProd").click(function () {
     $("#formView").show();
+    q.show();
     $("#pbn").show();
     $("#pcn").show();
     nameLabel.text("Product Name:");

@@ -60,10 +60,12 @@ $(document).ready(function () {
     let nameLabel = $("#nameL");
     let urlLabel = $("#urlL");
     let nameInput = $("#name");
+    let q = $("#q");
 
     if (param === "brands") {
       $("#pbn").hide();
       $("#pcn").hide();
+      q.hide();
       nameLabel.text("Brand Name:");
       urlLabel.text("Brand Logo:");
       nameInput.attr("placeholder", "Enter brand name");
@@ -72,6 +74,7 @@ $(document).ready(function () {
     if (param === "Categories") {
       $("#pbn").hide();
       $("#pcn").hide();
+      q.hide();
       nameLabel.text("Category Name:");
       urlLabel.text("Category Logo:");
       nameInput.attr("placeholder", "Enter category name");
@@ -80,6 +83,7 @@ $(document).ready(function () {
     if (param === "products") {
       $("#pbn").show();
       $("#pcn").show();
+      q.show();
       nameLabel.text("Product Name:");
       urlLabel.text("Product Logo:");
       nameInput.attr("placeholder", "Enter product name");
