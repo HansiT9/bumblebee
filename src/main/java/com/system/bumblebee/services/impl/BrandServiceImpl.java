@@ -16,7 +16,6 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public boolean checkBrandNameExists(String brandName) {
-        System.out.println("in method");
         Optional<BrandEntity> brand = brandRepository.findByBrandName(brandName);
 
         return brand.isPresent();

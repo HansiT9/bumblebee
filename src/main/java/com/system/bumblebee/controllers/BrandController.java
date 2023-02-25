@@ -17,7 +17,7 @@ public class BrandController {
 
     @GetMapping("/name/validate")
     public ResponseEntity<?> validateBrandName(@RequestParam String brandName) {
-        System.out.println(brandName);
+        System.out.println("in brand controller");
         boolean exists = brandService.checkBrandNameExists(brandName);
 
         if (exists) {
