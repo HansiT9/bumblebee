@@ -23,12 +23,23 @@ CREATE TABLE customer (
 
 CREATE TABLE brands (
   id INT PRIMARY KEY AUTO_INCREMENT,
-  brand_name VARCHAR(255) NOT NULL,
+  brand_name VARCHAR(255) NOT NULL UNIQUE,
   brand_logo VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE categories (
   id INT PRIMARY KEY AUTO_INCREMENT,
-  category_name VARCHAR(255) NOT NULL,
+  category_name VARCHAR(255) NOT NULL UNIQUE,
   category_logo VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE product (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  product_name VARCHAR(255),
+  product_url VARCHAR(255),
+  product_brand_name VARCHAR(255),
+  product_category_name VARCHAR(255),
+  product_qty INT,
+  CONSTRAINT FK_Product_Brand FOREIGN KEY (product_brand_name) REFERENCES brands (brand_name),
+  CONSTRAINT FK_Product_Category FOREIGN KEY (product_category_name) REFERENCES categories (category_name)
 );
