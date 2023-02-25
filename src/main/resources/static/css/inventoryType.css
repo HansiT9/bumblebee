@@ -1,0 +1,94 @@
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+main section:nth-child(1) {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    font-size: 1.5rem;
+}
+
+.topBtn {
+    width: fit-content;
+    padding: 0 5px 0 5px;
+    height: 30px;
+    font-size: 10px;
+    margin-left: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#new {
+    background-color: var(--default-links);
+    color: white;
+}
+
+#refresh {
+    background-color: #248524;
+    color: white;
+}
+
+main section:nth-child(2) {
+    margin-top: 20px;
+}
+
+.itemHeadings, .item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid var(--default-yello);
+}
+
+.itemHeadings h3 {
+    border-right: 1px solid var(--default-red);
+    flex: 1;
+    text-align: center;
+}
+
+#item02 img {
+    width: 150px;
+    height: 50px;
+    object-fit: contain;
+}
+
+.item h3, .item div {
+    text-align: center;
+}
+
+.controlsContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.controlBtn {
+    padding: 0 5px 0 5px;
+    width: fit-content;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bolder;
+    margin: 0 5px;
+}
+
+#remove {
+    background-color: var(--default-red);
+    color: white;
+}
+
+#update {
+    background-color: var(--default-links);
+    color: white;
+}
+
+ion-icon{
+    --ionicon-stroke-width: 40px;
+    margin-left: 5px;
+}
+
