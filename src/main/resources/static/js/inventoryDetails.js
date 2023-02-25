@@ -9,6 +9,7 @@ $(document).ready(function () {
 
   let nameLabel = $("#nameL");
   let urlLabel = $("#urlL");
+  let nameInput = $("#name");
 
   $("#newBrand").click(function () {
     $("#formView").show();
@@ -16,6 +17,7 @@ $(document).ready(function () {
     $("#pcn").hide();
     nameLabel.text("Brand Name:");
     urlLabel.text("Brand Logo:");
+    nameInput.attr("placeholder", "Enter brand name");
   });
 
   $("#newCat").click(function () {
@@ -24,6 +26,7 @@ $(document).ready(function () {
     $("#pcn").hide();
     nameLabel.text("Category Name:");
     urlLabel.text("Category Logo:");
+    nameInput.attr("placeholder", "Enter category name");
   });
 
   $("#newProd").click(function () {
@@ -32,5 +35,6 @@ $(document).ready(function () {
     $("#pcn").show();
     nameLabel.text("Product Name:");
     urlLabel.text("Product Logo:");
+    nameInput.attr("placeholder", "Enter product name");
   });
 });
