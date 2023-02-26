@@ -7,6 +7,7 @@ import com.system.bumblebee.services.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -30,5 +31,12 @@ public class BrandServiceImpl implements BrandService {
 
         BrandEntity savedBrand = brandRepository.save(brandEntity);
         return savedBrand != null;
+    }
+
+    @Override
+    public List<BrandEntity> fetchAllBrands() {
+        List<BrandEntity> brands = brandRepository.findAll();
+
+        return brands;
     }
 }

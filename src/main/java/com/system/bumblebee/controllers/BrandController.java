@@ -1,10 +1,13 @@
 package com.system.bumblebee.controllers;
 
 import com.system.bumblebee.dto.Brand;
+import com.system.bumblebee.entity.BrandEntity;
 import com.system.bumblebee.services.BrandService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/brand")
@@ -24,6 +27,17 @@ public class BrandController {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Brand Name Already Exists");
         } else {
             return ResponseEntity.status(HttpStatus.OK).body("Brand Name available");
+        }
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<?> fetchAllBrands() {
+        List<BrandEntity> brands = brandService.fetchAllBrands();
+
+        if (!brands.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.OK).body(brands);
+        } else {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("No data");
         }
     }
 
