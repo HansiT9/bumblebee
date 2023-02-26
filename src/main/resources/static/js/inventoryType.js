@@ -6,37 +6,35 @@ $(document).ready(function () {
 
   if (param === "brands") {
     $("#heading").text("Brands");
+    $("#formHeading").text("Add new Brand");
     $("#heading01").text("Brand Name");
     $("#heading02").text("Brand Logo");
     $("#heading03").text("No of Products");
-    $("#heading04").text("Available Categories");
+    $("#heading04").text("No of Categories");
     $("#heading05").hide();
     $("#heading06").hide();
     $("#item05").hide();
     $("#item06").hide();
-    getAllBrands();
+    getAllBrands(param);
   }
 
   if (param === "Categories") {
     $("#heading").text("Categories");
-    $("#heading01").text("category Name");
-    $("#heading02").text("category Logo");
+    $("#formHeading").text("Add new Category");
+    $("#heading01").text("Category Name");
+    $("#heading02").text("Category Logo");
     $("#heading03").text("No of Products");
     $("#heading04").text("No of Brands");
     $("#heading05").hide();
     $("#heading06").hide();
     $("#item05").hide();
     $("#item06").hide();
-    $(".itemHeadings h3, .itemHeadings div, .item h3, .item div").css(
-      "width",
-      "20%"
-    );
-
-    getAllCategories();
+    getAllCategories(param);
   }
 
   if (param === "products") {
     $("#heading").text("Products");
+    $("#formHeading").text("Add new Product");
     $("#heading01").text("Products Name");
     $("#heading02").text("Products Logo");
     $("#heading03").text("No of items Available");
@@ -97,7 +95,7 @@ $(document).ready(function () {
 });
 
 // Fetch methods to display items
-function getAllBrands() {
+function getAllBrands(param) {
   $.get("http://localhost:8080/brand/all")
     .done(function (data) {
       console.log(data);
@@ -169,7 +167,76 @@ function getAllBrands() {
       console.log(error);
     });
 }
-function getAllCategories() {}
+function getAllCategories(param) {
+  $.get("http://localhost:8080/category/all")
+    .done(function (data) {
+      console.log(data);
+      $.get("http://localhost:8080/product/count/product_for_category")
+        .done(function (dataCountProduct) {
+          console.log(dataCountProduct);
+          $.get("http://localhost:8080/product/count/brand_for_category")
+            .done(function (dataCountBrand) {
+              console.log(dataCountBrand);
+              if (data.length === 0) {
+                $(".itemContainer").append(
+                  '<h3 style="text-align: center; color: #46CB8B; margin-top: 10px;">Nothing to Show</h3>'
+                );
+              } else {
+                $.each(data, function (index, value) {
+                  var categoryName = value.categoryName;
+                  var categoryUrl = value.categoryLogo;
+                  var countProduct = dataCountProduct[categoryName] || 0;
+                  var countBrand = dataCountBrand[categoryName] || 0;
+                  const html =
+                    '<div class="item"><h3 id="item01">' +
+                    categoryName +
+                    '</h3><div id="item02"><img alt="logo" src="' +
+                    categoryUrl +
+                    '" /></div><h3 id="item03">' +
+                    countProduct.toString().padStart(2, "0") +
+                    '</h3><h3 id="item04">' +
+                    countBrand.toString().padStart(2, "0") +
+                    '</h3><div class="controlsContainer"><button class="controlBtn delete-btn" id="dId' +
+                    value.id +
+                    "In" +
+                    index +
+                    '">Remove<ion-icon name="trash-outline"></ion-icon></button><button class="controlBtn update-btn" id="uId' +
+                    value.id +
+                    "In" +
+                    index +
+                    '">Update<ion-icon name="refresh-outline"></ion-icon></button></div></div>';
+                  $(".itemContainer").append(html);
+                  $(
+                    ".itemHeadings h3, .itemHeadings div, .item h3, .item div"
+                  ).css("width", "20%");
+                });
+
+                $(".delete-btn").on("click", function (event) {
+                  const btnID = event.target.id;
+
+                  const startIndex = btnID.indexOf("Id") + 2;
+                  const endIndex = btnID.indexOf("In");
+                  const startIndexL = btnID.indexOf("In") + 2;
+                  const id = btnID.slice(startIndex, endIndex);
+                  const listId = btnID.slice(startIndexL, startIndexL + 2);
+                  const brandName = data[listId].brandName;
+
+                  removeItem(id, param, brandName);
+                });
+              }
+            })
+            .fail(function (error) {
+              console.log(error);
+            });
+        })
+        .fail(function (error) {
+          console.log(error);
+        });
+    })
+    .fail(function (error) {
+      console.log(error);
+    });
+}
 function getAllProducts() {}
 
 // delete methods to remove items
@@ -205,8 +272,9 @@ function removeItem(id, param, brandName) {
         });
     }
   }
-  if (type === "category") {
+  if (param === "Categories") {
+    console.log("In category delete");
   }
-  if (type === "product") {
+  if (param === "products") {
   }
 }
