@@ -77,12 +77,12 @@ main section:nth-child(2) {
     margin: 0 5px;
 }
 
-#remove {
+.red {
     background-color: var(--default-red);
     color: white;
 }
 
-#update {
+.blue {
     background-color: var(--default-links);
     color: white;
 }
@@ -90,5 +90,10 @@ main section:nth-child(2) {
 ion-icon{
     --ionicon-stroke-width: 40px;
     margin-left: 5px;
+}
+
+/*custom width*/
+.widthCustom {
+    width: 20%;
 }
 
