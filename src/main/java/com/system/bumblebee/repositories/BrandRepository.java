@@ -13,4 +13,6 @@ public interface BrandRepository extends JpaRepository<BrandEntity, Long> {
     Optional<BrandEntity> findByBrandName(String brandName);
     BrandEntity save(BrandEntity brand);
     List<BrandEntity> findAll();
+    void deleteById(Long id);
+    boolean existsById(Long id);
 }

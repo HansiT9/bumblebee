@@ -52,4 +52,15 @@ public class BrandController {
         }
     }
 
+    @DeleteMapping("/remove/single/{id}")
+    public ResponseEntity<?> removeAllWithBrandName(@PathVariable String id) {
+        boolean deleted = brandService.removeBrand(Integer.parseInt(id));
+
+        if (deleted) {
+            return ResponseEntity.status(HttpStatus.OK).body("Brand deleted under brand id " + id);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong on our side");
+        }
+    }
+
 }

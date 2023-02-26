@@ -39,4 +39,12 @@ public class BrandServiceImpl implements BrandService {
 
         return brands;
     }
+
+    @Override
+    public boolean removeBrand(int id) {
+        brandRepository.deleteById((long) id);
+        boolean exist = brandRepository.existsById((long) id);
+
+        return exist;
+    }
 }

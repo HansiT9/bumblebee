@@ -77,12 +77,12 @@ main section:nth-child(2) {
     margin: 0 5px;
 }
 
-.red {
+.delete-btn {
     background-color: var(--default-red);
     color: white;
 }
 
-.blue {
+.update-btn {
     background-color: var(--default-links);
     color: white;
 }
@@ -95,5 +95,10 @@ ion-icon{
 /*custom width*/
 .widthCustom {
     width: 20%;
+}
+
+#itemsForm h3 {
+    color: white !important;
+    font-size: 1.17rem !important;
 }
 

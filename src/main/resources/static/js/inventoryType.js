@@ -96,6 +96,7 @@ $(document).ready(function () {
   });
 });
 
+// Fetch methods to display items
 function getAllBrands() {
   $.get("http://localhost:8080/brand/all")
     .done(function (data) {
@@ -125,9 +126,13 @@ function getAllBrands() {
                     countProduct.toString().padStart(2, "0") +
                     '</h3><h3 id="item04">' +
                     countCategory.toString().padStart(2, "0") +
-                    '</h3><div class="controlsContainer"><button class="controlBtn red" id="remove' +
+                    '</h3><div class="controlsContainer"><button class="controlBtn delete-btn" id="dId' +
+                    value.id +
+                    "In" +
                     index +
-                    '">Remove<ion-icon name="trash-outline"></ion-icon></button><button class="controlBtn blue" id="update' +
+                    '">Remove<ion-icon name="trash-outline"></ion-icon></button><button class="controlBtn update-btn" id="uId' +
+                    value.id +
+                    "In" +
                     index +
                     '">Update<ion-icon name="refresh-outline"></ion-icon></button></div></div>';
                   $(".itemContainer").append(html);
@@ -135,6 +140,21 @@ function getAllBrands() {
                     ".itemHeadings h3, .itemHeadings div, .item h3, .item div"
                   ).css("width", "20%");
                 });
+
+                $(".delete-btn").on("click", function (event) {
+                  const btnID = event.target.id;
+
+                  const startIndex = btnID.indexOf("Id") + 2;
+                  const endIndex = btnID.indexOf("In");
+                  const startIndexL = btnID.indexOf("In") + 2;
+                  const id = btnID.slice(startIndex, endIndex);
+                  const listId = btnID.slice(startIndexL, startIndexL + 2);
+                  const brandName = data[listId].brandName;
+
+                  removeItem(id, param, brandName);
+                });
+
+                $(".update-btn").on("click", function (event) {});
               }
             })
             .fail(function (error) {
@@ -149,7 +169,44 @@ function getAllBrands() {
       console.log(error);
     });
 }
-
 function getAllCategories() {}
-
 function getAllProducts() {}
+
+// delete methods to remove items
+function removeItem(id, param, brandName) {
+  if (param === "brands") {
+    if (
+      confirm(
+        "By clicking ok, you agree to remove all details related brand and remove all products that are registered under the brand name"
+      )
+    ) {
+      $.ajax({
+        url:
+          "http://localhost:8080/product/remove/all_equals_brandname/" +
+          brandName,
+        type: "DELETE",
+      })
+        .done(function (data) {
+          console.log(data);
+          $.ajax({
+            url: "http://localhost:8080/brand/remove/single/" + id,
+            type: "DELETE",
+          })
+            .done(function (data) {
+              console.log("from final request", data);
+            })
+            .fail(function (error) {
+              console.log("error from final request", error);
+              location.reload();
+            });
+        })
+        .fail(function (error) {
+          console.log(error);
+        });
+    }
+  }
+  if (type === "category") {
+  }
+  if (type === "product") {
+  }
+}

@@ -9,4 +9,5 @@ public interface BrandService {
     boolean checkBrandNameExists(String brandName);
     boolean saveBrand(Brand brand);
     List<BrandEntity> fetchAllBrands();
+    boolean removeBrand(int id);
 }
