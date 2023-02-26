@@ -7,6 +7,7 @@ import com.system.bumblebee.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -30,5 +31,20 @@ public class CategoryServiceImpl implements CategoryService {
 
         CategoryEntity savedCategory = categoryRepository.save(categoryEntity);
         return savedCategory != null;
+    }
+
+    @Override
+    public List<CategoryEntity> fetchAllCategories() {
+        List<CategoryEntity> categories = categoryRepository.findAll();
+
+        return categories;
+    }
+
+    @Override
+    public boolean removeCategory(int id) {
+        categoryRepository.deleteById((long) id);
+        boolean exist = categoryRepository.existsById((long) id);
+
+        return exist;
     }
 }
