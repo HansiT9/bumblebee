@@ -43,3 +43,11 @@ CREATE TABLE product (
   CONSTRAINT FK_Product_Brand FOREIGN KEY (product_brand_name) REFERENCES brands (brand_name),
   CONSTRAINT FK_Product_Category FOREIGN KEY (product_category_name) REFERENCES categories (category_name)
 );
+
+SELECT product_brand_name, COUNT(*) AS productCount
+FROM product
+GROUP BY product_brand_name
+
+SELECT product_brand_name, COUNT(DISTINCT product_category_name) AS categoryCount
+FROM product
+GROUP BY product_brand_name;
