@@ -46,6 +46,20 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public Map<String, Long> getProductCountsByCategory() {
+        List<Object[]> results = productRepository.getProductCountsByCategory();
+        Map<String, Long> productCounts = new HashMap<>();
+
+        for (Object[] result : results) {
+            String productCategoryName = (String) result[0];
+            Long productCount = (Long) result[1];
+            productCounts.put(productCategoryName, productCount);
+        }
+
+        return productCounts;
+    }
+
+    @Override
     public Map<String, Long> getCategoryCountsByBrand() {
         List<Object[]> results = productRepository.getCategoryCountsByBrand();
         Map<String, Long> categoryCounts = new HashMap<>();
@@ -60,11 +74,23 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public Map<String, Long> getBrandCountsByCategory() {
+        List<Object[]> results = productRepository.getBrandCountsByCategory();
+        Map<String, Long> brandCounts = new HashMap<>();
+
+        for (Object[] result : results) {
+            String productCategoryName = (String) result[0];
+            Long brandCount = (Long) result[1];
+            brandCounts.put(productCategoryName, brandCount);
+        }
+
+        return brandCounts;
+    }
+
+    @Override
     @Transactional
     public boolean deleteAllWithBrandName(String brandName) {
         int result = productRepository.deleteByProductBrandName(brandName);
         return result > 0;
     }
-
-
 }

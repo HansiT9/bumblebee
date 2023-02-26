@@ -15,4 +15,8 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
     @Query("SELECT productBrandName, COUNT(DISTINCT productCategoryName) AS categoryCount FROM ProductEntity GROUP BY productBrandName")
     List<Object[]> getCategoryCountsByBrand();
     int deleteByProductBrandName(String brandName);
+    @Query("SELECT productCategoryName, COUNT(*) AS productCount FROM ProductEntity GROUP BY productCategoryName")
+    List<Object[]> getProductCountsByCategory();
+    @Query("SELECT productCategoryName, COUNT(DISTINCT productBrandName) AS brandCount FROM ProductEntity GROUP BY productCategoryName")
+    List<Object[]> getBrandCountsByCategory();
 }

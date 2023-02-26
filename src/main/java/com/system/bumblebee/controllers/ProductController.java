@@ -39,12 +39,34 @@ public class ProductController {
         }
     }
 
+    @GetMapping("/count/product_for_category")
+    public ResponseEntity<?> fetchProductCountForCategory() {
+        Map<String, Long> categoryCount = productService.getProductCountsByCategory();
+
+        if (!categoryCount.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.OK).body(categoryCount);
+        } else {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("No data");
+        }
+    }
+
     @GetMapping("/count/categorie_for_brand")
     public ResponseEntity<?> fetchCategoryCountForBrand() {
         Map<String, Long> categoryCount = productService.getCategoryCountsByBrand();
 
         if (!categoryCount.isEmpty()) {
             return ResponseEntity.status(HttpStatus.OK).body(categoryCount);
+        } else {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("No data");
+        }
+    }
+
+    @GetMapping("/count/brand_for_category")
+    public ResponseEntity<?> fetchBrandCountForCategory() {
+        Map<String, Long> brandCount = productService.getBrandCountsByCategory();
+
+        if (!brandCount.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.OK).body(brandCount);
         } else {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body("No data");
         }

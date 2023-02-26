@@ -9,4 +9,6 @@ public interface ProductService {
     Map<String, Long> getProductCountsByBrand();
     Map<String, Long> getCategoryCountsByBrand();
     boolean deleteAllWithBrandName(String brandName);
+    Map<String, Long> getProductCountsByCategory();
+    Map<String, Long> getBrandCountsByCategory();
 }
