@@ -12,7 +12,7 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
     ProductEntity save(ProductEntity product);
     @Query("SELECT productBrandName, COUNT(*) AS productCount FROM ProductEntity GROUP BY productBrandName")
     List<Object[]> getProductCountsByBrand();
-
     @Query("SELECT productBrandName, COUNT(DISTINCT productCategoryName) AS categoryCount FROM ProductEntity GROUP BY productBrandName")
     List<Object[]> getCategoryCountsByBrand();
+    int deleteByProductBrandName(String brandName);
 }

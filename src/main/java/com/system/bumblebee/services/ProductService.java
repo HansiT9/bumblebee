@@ -8,4 +8,5 @@ public interface ProductService {
     boolean saveProduct(Product product);
     Map<String, Long> getProductCountsByBrand();
     Map<String, Long> getCategoryCountsByBrand();
+    boolean deleteAllWithBrandName(String brandName);
 }

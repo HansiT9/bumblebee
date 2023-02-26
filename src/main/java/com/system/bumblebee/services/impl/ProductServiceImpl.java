@@ -4,6 +4,7 @@ import com.system.bumblebee.dto.Product;
 import com.system.bumblebee.entity.ProductEntity;
 import com.system.bumblebee.repositories.ProductRepository;
 import com.system.bumblebee.services.ProductService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -57,5 +58,13 @@ public class ProductServiceImpl implements ProductService {
 
         return categoryCounts;
     }
+
+    @Override
+    @Transactional
+    public boolean deleteAllWithBrandName(String brandName) {
+        int result = productRepository.deleteByProductBrandName(brandName);
+        return result > 0;
+    }
+
 
 }

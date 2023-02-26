@@ -49,4 +49,16 @@ public class ProductController {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body("No data");
         }
     }
+
+    @DeleteMapping("/remove/all_equals_brandname/{brandName}")
+    public ResponseEntity<?> removeAllWithBrandName(@PathVariable String brandName) {
+        System.out.println(brandName);
+        boolean deleted = productService.deleteAllWithBrandName(brandName);
+
+        if (deleted) {
+            return ResponseEntity.status(HttpStatus.OK).body("Products deleted under brand name " + brandName);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong on our side");
+        }
+    }
 }
