@@ -56,30 +56,8 @@
           <div class="controlsBlack"></div>
         </div>
       </section>
-      <section>
-        <div class="item">
-          <h3 id="item01">Adidas</h3>
-          <div id="item02">
-            <img
-              alt="logo"
-              src="https://static.vecteezy.com/system/resources/thumbnails/010/994/276/small/adidas-logo-symbol-clothes-design-icon-abstract-football-illustration-free-vector.jpg"
-            />
-          </div>
-          <h3 id="item03">03</h3>
-          <h3 id="item04">04</h3>
-          <h3 id="item05">04</h3>
-          <h3 id="item06">04</h3>
-          <div class="controlsContainer">
-            <button class="controlBtn" id="remove">
-              Remove
-              <ion-icon name="trash-outline"></ion-icon>
-            </button>
-            <button class="controlBtn" id="update">
-              Update
-              <ion-icon name="refresh-outline"></ion-icon>
-            </button>
-          </div>
-        </div>
+      <section class="itemContainer">
+
       </section>
     </main>
 
@@ -96,6 +74,7 @@
             <input
               class="form-control"
               id="name"
+              name="name"
               placeholder="Enter brand name"
               required
               type="text"
@@ -106,6 +85,7 @@
             <input
               class="form-control"
               id="url"
+              name="url"
               placeholder="Enter url to background image (300 &#215; 300)"
               required
               type="url"
@@ -117,7 +97,6 @@
               class="form-control"
               id="brand"
               placeholder="Enter brand name of product"
-              required
               type="text"
             />
           </div>
@@ -127,7 +106,6 @@
               class="form-control"
               id="category"
               placeholder="Enter category name of product"
-              required
               type="text"
             />
             <div class="form-group" id="q">
@@ -138,7 +116,6 @@
                 max="100"
                 min="1"
                 placeholder="Enter the number of items (min - 1 and max - 100)"
-                required
                 type="number"
               />
             </div>

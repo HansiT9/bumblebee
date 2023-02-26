@@ -14,10 +14,7 @@ $(document).ready(function () {
     $("#heading06").hide();
     $("#item05").hide();
     $("#item06").hide();
-    $(".itemHeadings h3, .itemHeadings div, .item h3, .item div").css(
-      "width",
-      "20%"
-    );
+    getAllBrands();
   }
 
   if (param === "Categories") {
@@ -34,6 +31,8 @@ $(document).ready(function () {
       "width",
       "20%"
     );
+
+    getAllCategories();
   }
 
   if (param === "products") {
@@ -48,6 +47,8 @@ $(document).ready(function () {
       "width",
       "16%"
     );
+
+    getAllProducts();
   }
 
   $("#refresh").click(function () {
@@ -94,3 +95,61 @@ $(document).ready(function () {
     $("#formView").fadeOut();
   });
 });
+
+function getAllBrands() {
+  $.get("http://localhost:8080/brand/all")
+    .done(function (data) {
+      console.log(data);
+      $.get("http://localhost:8080/product/count/product_for_brand")
+        .done(function (dataCountProduct) {
+          console.log(dataCountProduct);
+          $.get("http://localhost:8080/product/count/categorie_for_brand")
+            .done(function (dataCountCategory) {
+              console.log(dataCountCategory);
+              if (data.length === 0) {
+                $(".itemContainer").append(
+                  '<h3 style="text-align: center; color: #46CB8B; margin-top: 10px;">Nothing to Show</h3>'
+                );
+              } else {
+                $.each(data, function (index, value) {
+                  var brandName = value.brandName;
+                  var logoUrl = value.brandLogo; // Replace with actual logo URL
+                  var countProduct = dataCountProduct[brandName] || 0;
+                  var countCategory = dataCountCategory[brandName] || 0;
+                  const html =
+                    '<div class="item"><h3 id="item01">' +
+                    brandName +
+                    '</h3><div id="item02"><img alt="logo" src="' +
+                    logoUrl +
+                    '" /></div><h3 id="item03">' +
+                    countProduct.toString().padStart(2, "0") +
+                    '</h3><h3 id="item04">' +
+                    countCategory.toString().padStart(2, "0") +
+                    '</h3><div class="controlsContainer"><button class="controlBtn red" id="remove' +
+                    index +
+                    '">Remove<ion-icon name="trash-outline"></ion-icon></button><button class="controlBtn blue" id="update' +
+                    index +
+                    '">Update<ion-icon name="refresh-outline"></ion-icon></button></div></div>';
+                  $(".itemContainer").append(html);
+                  $(
+                    ".itemHeadings h3, .itemHeadings div, .item h3, .item div"
+                  ).css("width", "20%");
+                });
+              }
+            })
+            .fail(function (error) {
+              console.log(error);
+            });
+        })
+        .fail(function (error) {
+          console.log(error);
+        });
+    })
+    .fail(function (error) {
+      console.log(error);
+    });
+}
+
+function getAllCategories() {}
+
+function getAllProducts() {}
