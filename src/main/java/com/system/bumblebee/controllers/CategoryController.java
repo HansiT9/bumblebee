@@ -53,7 +53,7 @@ public class CategoryController {
     }
 
     @DeleteMapping("/remove/single/{id}")
-    public ResponseEntity<?> removeAllWithCategoryName(@PathVariable String id) {
+    public ResponseEntity<?> removeAllWithCategoryId(@PathVariable String id) {
         boolean deleted = categoryService.removeCategory(Integer.parseInt(id));
 
         if (deleted) {
