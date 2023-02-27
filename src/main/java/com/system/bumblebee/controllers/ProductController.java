@@ -1,11 +1,13 @@
 package com.system.bumblebee.controllers;
 
 import com.system.bumblebee.dto.Product;
+import com.system.bumblebee.entity.ProductEntity;
 import com.system.bumblebee.services.ProductService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -25,6 +27,17 @@ public class ProductController {
             return ResponseEntity.status(HttpStatus.OK).body("Product Created");
         } else {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while processing your request, please try again later");
+        }
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<?> fetchAllCategories() {
+        List<ProductEntity> product = productService.fetchAllProducts();
+
+        if (!product.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.OK).body(product);
+        } else {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("No data");
         }
     }
 
@@ -79,6 +92,29 @@ public class ProductController {
 
         if (deleted) {
             return ResponseEntity.status(HttpStatus.OK).body("Products deleted under brand name " + brandName);
+        } else {
+            return ResponseEntity.status(HttpStatus.OK).body("Something went wrong on our side");
+        }
+    }
+
+    @DeleteMapping("/remove/all_equals_categoryname/{categoryName}")
+    public ResponseEntity<?> removeAllWithCategoryName(@PathVariable String categoryName) {
+        System.out.println(categoryName);
+        boolean deleted = productService.deleteAllWithCategoryName(categoryName);
+
+        if (deleted) {
+            return ResponseEntity.status(HttpStatus.OK).body("Products deleted under category name " + categoryName);
+        } else {
+            return ResponseEntity.status(HttpStatus.OK).body("Something went wrong on our side");
+        }
+    }
+
+    @DeleteMapping("/remove/single/{id}")
+    public ResponseEntity<?> removeAllWithProductId(@PathVariable String id) {
+        boolean deleted = productService.removeProduct(Integer.parseInt(id));
+
+        if (deleted) {
+            return ResponseEntity.status(HttpStatus.OK).body("Product deleted under brand id " + id);
         } else {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong on our side");
         }

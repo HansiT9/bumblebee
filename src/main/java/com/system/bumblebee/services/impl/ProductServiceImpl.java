@@ -93,4 +93,26 @@ public class ProductServiceImpl implements ProductService {
         int result = productRepository.deleteByProductBrandName(brandName);
         return result > 0;
     }
+
+    @Override
+    @Transactional
+    public boolean deleteAllWithCategoryName(String categoryName) {
+        int result = productRepository.deleteByProductCategoryName(categoryName);
+        return result > 0;
+    }
+
+    @Override
+    public List<ProductEntity> fetchAllProducts() {
+        List<ProductEntity> products = productRepository.findAll();
+
+        return products;
+    }
+
+    @Override
+    public boolean removeProduct(int id) {
+        productRepository.deleteById((long) id);
+        boolean exist = productRepository.existsById((long) id);
+
+        return exist;
+    }
 }

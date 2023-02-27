@@ -1,7 +1,9 @@
 package com.system.bumblebee.services;
 
 import com.system.bumblebee.dto.Product;
+import com.system.bumblebee.entity.ProductEntity;
 
+import java.util.List;
 import java.util.Map;
 
 public interface ProductService {
@@ -11,4 +13,7 @@ public interface ProductService {
     boolean deleteAllWithBrandName(String brandName);
     Map<String, Long> getProductCountsByCategory();
     Map<String, Long> getBrandCountsByCategory();
+    boolean deleteAllWithCategoryName(String categoryName);
+    List<ProductEntity> fetchAllProducts();
+    boolean removeProduct(int id);
 }
