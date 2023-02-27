@@ -87,6 +87,62 @@ $(document).ready(function () {
 
   $("#closeBtn").click(function () {
     $("#formView").fadeOut();
+    location.reload();
+  });
+
+  let timeout;
+  $("#name").on("input", function () {
+    clearTimeout(timeout);
+    timeout = setTimeout(function () {
+      if (param === "brands") {
+        const name = $("#name").val();
+        const message = "Brand Name Already Exist!";
+        validateBrandName(name, message, true);
+      }
+      if (param === "Categories") {
+        const name = $("#name").val();
+        const message = "Category Name Already Exist!";
+        validateCategoryName(name, message, true);
+      }
+    }, 1000);
+  });
+
+  let timeoutBName;
+  $("#brand").on("input", function () {
+    clearTimeout(timeoutBName);
+    timeoutBName = setTimeout(function () {
+      const name = $("#brand").val();
+      const message = "Brand Name Valid!";
+      validateBrandName(name, message, false);
+    }, 1000);
+  });
+
+  let timeoutCName;
+  $("#category").on("input", function () {
+    clearTimeout(timeoutCName);
+    timeoutCName = setTimeout(function () {
+      const name = $("#category").val();
+      const message = "Category Name Valid!";
+      validateCategoryName(name, message, false);
+    }, 1000);
+  });
+
+  // form submit
+  $("#form-reg").submit(function (event) {
+    event.preventDefault();
+    console.log("In save brand form method 1");
+
+    // Request if form type is brand
+    if (param === "brands") {
+      console.log("In save brand form method 2");
+      saveBrand();
+    }
+    if (param === "Categories") {
+      saveCategory();
+    }
+    if (param === "products") {
+      saveProduct();
+    }
   });
 });
 
@@ -107,8 +163,11 @@ function getAllBrands(param) {
               console.log(dataCountCategory);
               if (data === undefined) {
                 $(".itemContainer").append(
-                  '<h3 style="text-align: center; color: #46CB8B; margin-top: 10px;">Nothing to Show</h3>'
+                  '<h3 style="text-align: center; color: #46CB8B; margin-top: 15%;">Nothing to Show ...</h3>'
                 );
+                $(
+                  ".itemHeadings h3, .itemHeadings div, .item h3, .item div"
+                ).css("width", "20%");
               } else {
                 $.each(data, function (index, value) {
                   var brandName = value.brandName;
@@ -191,8 +250,11 @@ function getAllCategories(param) {
               console.log(dataCountBrand);
               if (data === undefined) {
                 $(".itemContainer").append(
-                  '<h3 style="text-align: center; color: #46CB8B; margin-top: 10px;">Nothing to Show</h3>'
+                  '<h3 style="text-align: center; color: #46CB8B; margin-top: 15%;">Nothing to Show ...</h3>'
                 );
+                $(
+                  ".itemHeadings h3, .itemHeadings div, .item h3, .item div"
+                ).css("width", "20%");
               } else {
                 $.each(data, function (index, value) {
                   var categoryName = value.categoryName;
@@ -267,7 +329,11 @@ function getAllProducts(param) {
     .done(function (data) {
       if (data === undefined) {
         $(".itemContainer").append(
-          '<h3 style="text-align: center; color: #46CB8B; margin-top: 10px;">Nothing to Show</h3>'
+          '<h3 style="text-align: center; color: #46CB8B; margin-top: 15%;">Nothing to Show ...</h3>'
+        );
+        $(".itemHeadings h3, .itemHeadings div, .item h3, .item div").css(
+          "width",
+          "20%"
         );
       } else {
         $.each(data, function (index, value) {
@@ -417,4 +483,141 @@ function removeItem(id, param, brandName) {
         });
     }
   }
+}
+
+// validation methods
+function validateBrandName(name, message, needFormat) {
+  if (name !== "") {
+    $.get("http://localhost:8080/brand/name/validate", {
+      brandName: name,
+    })
+      .done(function (data) {
+        console.log("result", data);
+        if (!needFormat) {
+          alert("Brand name not registered!");
+        }
+        $("#brand").val("");
+      })
+      .fail(function () {
+        alert(message);
+        if (needFormat) {
+          $("#name").val("");
+        }
+      });
+  }
+}
+
+function validateCategoryName(name, message, needFormat) {
+  if (name !== "") {
+    $.get("http://localhost:8080/category/name/validate", {
+      categoryName: name,
+    })
+      .done(function (data) {
+        console.log(data);
+        if (!needFormat) {
+          alert("Category name not registered!");
+        }
+        $("#category").val("");
+      })
+      .fail(function () {
+        alert(message);
+        if (needFormat) {
+          $("#name").val("");
+        }
+      });
+  }
+}
+
+// save methods
+
+function saveBrand() {
+  const brandName = $("#name").val();
+  let brandUrl = $("#url").val();
+  console.log("In save brand method");
+
+  if (brandUrl === "") {
+    brandUrl = "http://localhost:8080/image/brand.png";
+  }
+
+  $.ajax({
+    url: "http://localhost:8080/brand/new",
+    method: "POST",
+    data: JSON.stringify({
+      brandName: brandName,
+      brandLogo: brandUrl,
+    }),
+    contentType: "application/json",
+  })
+    .done(function () {
+      console.log("In save brand method 2");
+      alert("New Brand created.");
+      $("#form-reg")[0].reset();
+    })
+    .fail(function () {
+      alert(
+        "An error occurred while processing your request, please try again later"
+      );
+    });
+}
+
+function saveCategory() {
+  const categoryName = $("#name").val();
+  let categoryUrl = $("#url").val();
+
+  if (categoryUrl === "") {
+    categoryUrl = "http://localhost:8080/image/categories.png";
+  }
+
+  $.ajax({
+    url: "http://localhost:8080/category/new",
+    method: "POST",
+    data: JSON.stringify({
+      categoryName: categoryName,
+      categoryLogo: categoryUrl,
+    }),
+    contentType: "application/json",
+  })
+    .done(function () {
+      alert("New Category created.");
+      $("#form-reg")[0].reset();
+    })
+    .fail(function () {
+      alert(
+        "An error occurred while processing your request, please try again later"
+      );
+    });
+}
+
+function saveProduct() {
+  const productName = $("#name").val();
+  let productUrl = $("#url").val();
+  let productBrandName = $("#brand").val();
+  let productCategoryName = $("#category").val();
+  let productQty = $("#quantity").val();
+
+  if (productUrl === "") {
+    productUrl = "http://localhost:8080/image/product-release.png";
+  }
+
+  $.ajax({
+    url: "http://localhost:8080/product/new",
+    method: "POST",
+    data: JSON.stringify({
+      productName: productName,
+      productUrl: productUrl,
+      productBrandName: productBrandName,
+      productCategoryName: productCategoryName,
+      productQty: productQty,
+    }),
+    contentType: "application/json",
+  })
+    .done(function () {
+      alert("New Product created.");
+      $("#form-reg")[0].reset();
+    })
+    .fail(function () {
+      alert(
+        "An error occurred while processing your request, please try again later"
+      );
+    });
 }
