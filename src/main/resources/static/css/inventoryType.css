@@ -15,7 +15,7 @@ main section:nth-child(1) {
     width: fit-content;
     padding: 0 5px 0 5px;
     height: 30px;
-    font-size: 10px;
+    font-size: 11px;
     margin-left: 10px;
     margin-top: 5px;
     border-radius: 5px;
@@ -28,7 +28,7 @@ main section:nth-child(1) {
 }
 
 #refresh {
-    background-color: #248524;
+    background-color: #1dbf73;
     color: white;
 }
 
