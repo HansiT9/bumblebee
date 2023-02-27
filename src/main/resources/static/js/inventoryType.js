@@ -5,43 +5,17 @@ $(document).ready(function () {
   let param = searchParams.get("type");
 
   if (param === "brands") {
-    $("#heading").text("Brands");
-    $("#formHeading").text("Add new Brand");
-    $("#heading01").text("Brand Name");
-    $("#heading02").text("Brand Logo");
-    $("#heading03").text("No of Products");
-    $("#heading04").text("No of Categories");
-    $("#heading05").hide();
-    $("#heading06").hide();
-    $("#item05").hide();
-    $("#item06").hide();
+    brandSettings();
     getAllBrands(param);
   }
 
   if (param === "Categories") {
-    $("#heading").text("Categories");
-    $("#formHeading").text("Add new Category");
-    $("#heading01").text("Category Name");
-    $("#heading02").text("Category Logo");
-    $("#heading03").text("No of Products");
-    $("#heading04").text("No of Brands");
-    $("#heading05").hide();
-    $("#heading06").hide();
-    $("#item05").hide();
-    $("#item06").hide();
+    categorySettings();
     getAllCategories(param);
   }
 
   if (param === "products") {
-    $("#heading").text("Products");
-    $("#formHeading").text("Add new Product");
-    $("#heading01").text("Products Name");
-    $("#heading02").text("Products Logo");
-    $("#heading03").text("No of items Available");
-    $("#heading04").text("No of items Sold");
-    $("#heading05").text("Brand Name");
-    $("#heading06").text("category Name");
-
+    productSettings();
     getAllProducts(param);
   }
 
@@ -58,30 +32,15 @@ $(document).ready(function () {
     let q = $("#q");
 
     if (param === "brands") {
-      $("#pbn").hide();
-      $("#pcn").hide();
-      q.hide();
-      nameLabel.text("Brand Name:");
-      urlLabel.text("Brand Logo:");
-      nameInput.attr("placeholder", "Enter brand name");
+      formBrandSettings(q, nameLabel, urlLabel, nameInput);
     }
 
     if (param === "Categories") {
-      $("#pbn").hide();
-      $("#pcn").hide();
-      q.hide();
-      nameLabel.text("Category Name:");
-      urlLabel.text("Category Logo:");
-      nameInput.attr("placeholder", "Enter category name");
+      formCategorySettings(q, nameLabel, urlLabel, nameInput);
     }
 
     if (param === "products") {
-      $("#pbn").show();
-      $("#pcn").show();
-      q.show();
-      nameLabel.text("Product Name:");
-      urlLabel.text("Product Logo:");
-      nameInput.attr("placeholder", "Enter product name");
+      formProductSettings(q, nameLabel, urlLabel, nameInput);
     }
   });
 
@@ -223,7 +182,18 @@ function getAllBrands(param) {
                   removeItem(id, param, brandName);
                 });
 
-                $(".update-btn").on("click", function (event) {});
+                $(".update-btn").on("click", function (event) {
+                  const btnID = event.target.id;
+
+                  const startIndex = btnID.indexOf("Id") + 2;
+                  const endIndex = btnID.indexOf("In");
+                  const startIndexL = btnID.indexOf("In") + 2;
+                  const id = btnID.slice(startIndex, endIndex);
+                  const listId = btnID.slice(startIndexL, startIndexL + 2);
+                  const itemObject = data[listId];
+
+                  updateItem(id, param, itemObject);
+                });
               }
             })
             .fail(function (error) {
@@ -506,7 +476,6 @@ function validateBrandName(name, message, needFormat) {
       });
   }
 }
-
 function validateCategoryName(name, message, needFormat) {
   if (name !== "") {
     $.get("http://localhost:8080/category/name/validate", {
@@ -529,7 +498,6 @@ function validateCategoryName(name, message, needFormat) {
 }
 
 // save methods
-
 function saveBrand() {
   const brandName = $("#name").val();
   let brandUrl = $("#url").val();
@@ -559,7 +527,6 @@ function saveBrand() {
       );
     });
 }
-
 function saveCategory() {
   const categoryName = $("#name").val();
   let categoryUrl = $("#url").val();
@@ -587,7 +554,6 @@ function saveCategory() {
       );
     });
 }
-
 function saveProduct() {
   const productName = $("#name").val();
   let productUrl = $("#url").val();
@@ -620,4 +586,88 @@ function saveProduct() {
         "An error occurred while processing your request, please try again later"
       );
     });
+}
+
+// update methods
+function updateItem(id, param, itemObject) {
+  $("#submitBtn").text("Update");
+  $("#formView").show();
+
+  let nameLabel = $("#nameL");
+  let urlLabel = $("#urlL");
+  let nameInput = $("#name");
+  let q = $("#q");
+
+  if (param === "brands") {
+    formBrandSettings(q, nameLabel, urlLabel, nameInput);
+  }
+
+  if (param === "Categories") {
+    formCategorySettings(q, nameLabel, urlLabel, nameInput);
+  }
+
+  if (param === "products") {
+    formProductSettings(q, nameLabel, urlLabel, nameInput);
+  }
+}
+
+// Setting changes
+function brandSettings() {
+  $("#heading").text("Brands");
+  $("#formHeading").text("Add new Brand");
+  $("#heading01").text("Brand Name");
+  $("#heading02").text("Brand Logo");
+  $("#heading03").text("No of Products");
+  $("#heading04").text("No of Categories");
+  $("#heading05").hide();
+  $("#heading06").hide();
+  $("#item05").hide();
+  $("#item06").hide();
+}
+function categorySettings() {
+  $("#heading").text("Categories");
+  $("#formHeading").text("Add new Category");
+  $("#heading01").text("Category Name");
+  $("#heading02").text("Category Logo");
+  $("#heading03").text("No of Products");
+  $("#heading04").text("No of Brands");
+  $("#heading05").hide();
+  $("#heading06").hide();
+  $("#item05").hide();
+  $("#item06").hide();
+}
+function productSettings() {
+  $("#heading").text("Products");
+  $("#formHeading").text("Add new Product");
+  $("#heading01").text("Products Name");
+  $("#heading02").text("Products Logo");
+  $("#heading03").text("No of items Available");
+  $("#heading04").text("No of items Sold");
+  $("#heading05").text("Brand Name");
+  $("#heading06").text("category Name");
+}
+
+function formBrandSettings(q, nameLabel, urlLabel, nameInput) {
+  $("#pbn").hide();
+  $("#pcn").hide();
+  q.hide();
+  nameLabel.text("Brand Name:");
+  urlLabel.text("Brand Logo:");
+  nameInput.attr("placeholder", "Enter brand name");
+}
+function formCategorySettings(q, nameLabel, urlLabel, nameInput) {
+  $("#pbn").hide();
+  $("#pcn").hide();
+  q.hide();
+  nameLabel.text("Category Name:");
+  urlLabel.text("Category Logo:");
+  nameInput.attr("placeholder", "Enter category name");
+}
+function formProductSettings(q, nameLabel, urlLabel, nameInput) {
+  $("#pbn").show();
+  $("#pcn").show();
+  q.show();
+  nameLabel.text("Product Name:");
+  urlLabel.text("Product Logo:");
+  nameInput.attr("placeholder", "Enter product name");
 }
