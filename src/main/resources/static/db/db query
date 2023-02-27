@@ -55,3 +55,7 @@ GROUP BY product_brand_name;
 SELECT product_category_name, COUNT(*) AS productCount
 FROM product
 GROUP BY product_category_name;
+
+SELECT product_category_name, COUNT(DISTINCT product_brand_name) AS brandCount
+FROM product
+GROUP BY product_category_name;
