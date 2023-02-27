@@ -41,12 +41,8 @@ $(document).ready(function () {
     $("#heading04").text("No of items Sold");
     $("#heading05").text("Brand Name");
     $("#heading06").text("category Name");
-    $(".itemHeadings h3, .itemHeadings div, .item h3, .item div").css(
-      "width",
-      "16%"
-    );
 
-    getAllProducts();
+    getAllProducts(param);
   }
 
   $("#refresh").click(function () {
@@ -96,6 +92,10 @@ $(document).ready(function () {
 
 // Fetch methods to display items
 function getAllBrands(param) {
+  $(".itemHeadings h3, .itemHeadings div, .item h3, .item div").css(
+    "width",
+    "20%"
+  );
   $.get("http://localhost:8080/brand/all")
     .done(function (data) {
       console.log(data);
@@ -105,7 +105,7 @@ function getAllBrands(param) {
           $.get("http://localhost:8080/product/count/categorie_for_brand")
             .done(function (dataCountCategory) {
               console.log(dataCountCategory);
-              if (data.length === 0) {
+              if (data === undefined) {
                 $(".itemContainer").append(
                   '<h3 style="text-align: center; color: #46CB8B; margin-top: 10px;">Nothing to Show</h3>'
                 );
@@ -113,8 +113,20 @@ function getAllBrands(param) {
                 $.each(data, function (index, value) {
                   var brandName = value.brandName;
                   var logoUrl = value.brandLogo; // Replace with actual logo URL
-                  var countProduct = dataCountProduct[brandName] || 0;
-                  var countCategory = dataCountCategory[brandName] || 0;
+                  var countProduct;
+                  var countCategory;
+                  if (dataCountCategory === undefined) {
+                    countCategory = 0;
+                  } else {
+                    countCategory = dataCountCategory[brandName] || 0;
+                  }
+
+                  if (dataCountProduct === undefined) {
+                    countProduct = 0;
+                  } else {
+                    countProduct = dataCountProduct[brandName] || 0;
+                  }
+
                   const html =
                     '<div class="item"><h3 id="item01">' +
                     brandName +
@@ -177,7 +189,7 @@ function getAllCategories(param) {
           $.get("http://localhost:8080/product/count/brand_for_category")
             .done(function (dataCountBrand) {
               console.log(dataCountBrand);
-              if (data.length === 0) {
+              if (data === undefined) {
                 $(".itemContainer").append(
                   '<h3 style="text-align: center; color: #46CB8B; margin-top: 10px;">Nothing to Show</h3>'
                 );
@@ -185,8 +197,20 @@ function getAllCategories(param) {
                 $.each(data, function (index, value) {
                   var categoryName = value.categoryName;
                   var categoryUrl = value.categoryLogo;
-                  var countProduct = dataCountProduct[categoryName] || 0;
-                  var countBrand = dataCountBrand[categoryName] || 0;
+                  var countProduct;
+                  var countBrand;
+                  if (dataCountProduct === undefined) {
+                    countProduct = 0;
+                  } else {
+                    countProduct = dataCountProduct[categoryName] || 0;
+                  }
+
+                  if (dataCountBrand === undefined) {
+                    countBrand = 0;
+                  } else {
+                    countBrand = dataCountBrand[categoryName] || 0;
+                  }
+
                   const html =
                     '<div class="item"><h3 id="item01">' +
                     categoryName +
@@ -206,10 +230,10 @@ function getAllCategories(param) {
                     index +
                     '">Update<ion-icon name="refresh-outline"></ion-icon></button></div></div>';
                   $(".itemContainer").append(html);
-                  $(
-                    ".itemHeadings h3, .itemHeadings div, .item h3, .item div"
-                  ).css("width", "20%");
                 });
+                $(
+                  ".itemHeadings h3, .itemHeadings div, .item h3, .item div"
+                ).css("width", "20%");
 
                 $(".delete-btn").on("click", function (event) {
                   const btnID = event.target.id;
@@ -219,9 +243,10 @@ function getAllCategories(param) {
                   const startIndexL = btnID.indexOf("In") + 2;
                   const id = btnID.slice(startIndex, endIndex);
                   const listId = btnID.slice(startIndexL, startIndexL + 2);
-                  const brandName = data[listId].brandName;
+                  console.log(listId);
+                  const categoryName = data[listId].categoryName;
 
-                  removeItem(id, param, brandName);
+                  removeItem(id, param, categoryName);
                 });
               }
             })
@@ -237,14 +262,78 @@ function getAllCategories(param) {
       console.log(error);
     });
 }
-function getAllProducts() {}
+function getAllProducts(param) {
+  $.get("http://localhost:8080/product/all")
+    .done(function (data) {
+      if (data === undefined) {
+        $(".itemContainer").append(
+          '<h3 style="text-align: center; color: #46CB8B; margin-top: 10px;">Nothing to Show</h3>'
+        );
+      } else {
+        $.each(data, function (index, value) {
+          var productName = value.productName;
+          var productUrl = value.productUrl;
+          var productQty = value.productQty;
+          var itemsSold = 0;
+          var brandName = value.productBrandName;
+          var categoryName = value.productCategoryName;
+
+          const html =
+            '<div class="item"><h3 id="item01">' +
+            productName +
+            '</h3><div id="item02"><img alt="logo" src="' +
+            productUrl +
+            '" /></div><h3 id="item03">' +
+            productQty.toString().padStart(2, "0") +
+            '</h3><h3 id="item04">' +
+            itemsSold.toString().padStart(2, "0") +
+            '</h3><h3 id="item05">' +
+            brandName +
+            '</h3><h3 id="item05">' +
+            categoryName +
+            '</h3><div class="controlsContainer"><button class="controlBtn delete-btn" id="dId' +
+            value.id +
+            "In" +
+            index +
+            '">Remove<ion-icon name="trash-outline"></ion-icon></button><button class="controlBtn update-btn" id="uId' +
+            value.id +
+            "In" +
+            index +
+            '">Update<ion-icon name="refresh-outline"></ion-icon></button></div></div>';
+          $(".itemContainer").append(html);
+        });
+        $(".itemHeadings h3, .itemHeadings div, .item h3, .item div").css(
+          "width",
+          "16%"
+        );
+        $(".delete-btn").on("click", function (event) {
+          const btnID = event.target.id;
+
+          const startIndex = btnID.indexOf("Id") + 2;
+          const endIndex = btnID.indexOf("In");
+          const startIndexL = btnID.indexOf("In") + 2;
+          const id = btnID.slice(startIndex, endIndex);
+          const listId = btnID.slice(startIndexL, startIndexL + 2);
+          console.log(listId);
+          const productName = data[listId].productName;
+
+          removeItem(id, param, productName);
+        });
+      }
+    })
+    .fail(function (error) {
+      console.log(error);
+    });
+}
 
 // delete methods to remove items
 function removeItem(id, param, brandName) {
   if (param === "brands") {
     if (
       confirm(
-        "By clicking ok, you agree to remove all details related brand and remove all products that are registered under the brand name"
+        "By clicking ok, you agree to remove all details related to the  brand" +
+          brandName +
+          " and remove all products that are registered under the brand name"
       )
     ) {
       $.ajax({
@@ -261,6 +350,7 @@ function removeItem(id, param, brandName) {
           })
             .done(function (data) {
               console.log("from final request", data);
+              location.reload();
             })
             .fail(function (error) {
               console.log("error from final request", error);
@@ -273,8 +363,58 @@ function removeItem(id, param, brandName) {
     }
   }
   if (param === "Categories") {
-    console.log("In category delete");
+    if (
+      confirm(
+        "By clicking ok, you agree to remove all details related to the category name " +
+          brandName +
+          " and remove all products that are registered under the category name"
+      )
+    ) {
+      $.ajax({
+        url:
+          "http://localhost:8080/product/remove/all_equals_categoryname/" +
+          brandName,
+        type: "DELETE",
+      })
+        .done(function (data) {
+          console.log(data.status);
+          $.ajax({
+            url: "http://localhost:8080/category/remove/single/" + id,
+            type: "DELETE",
+          })
+            .done(function (data) {
+              console.log("from final request", data.status);
+              location.reload();
+            })
+            .fail(function (error) {
+              console.log("error from final request", error.status);
+              location.reload();
+            });
+        })
+        .fail(function (error) {
+          console.log("error from one before last request", error.status);
+        });
+    }
   }
   if (param === "products") {
+    if (
+      confirm(
+        "By clicking ok, you agree to remove all details related to the product name " +
+          brandName
+      )
+    ) {
+      $.ajax({
+        url: "http://localhost:8080/product/remove/single/" + id,
+        type: "DELETE",
+      })
+        .done(function (data) {
+          console.log(data);
+          location.reload();
+        })
+        .fail(function (error) {
+          console.log(error);
+          location.reload();
+        });
+    }
   }
 }
