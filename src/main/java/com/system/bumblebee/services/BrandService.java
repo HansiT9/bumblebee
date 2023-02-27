@@ -10,4 +10,5 @@ public interface BrandService {
     boolean saveBrand(Brand brand);
     List<BrandEntity> fetchAllBrands();
     boolean removeBrand(int id);
+    boolean updateBrandNameById(Long id, Brand brand);
 }

@@ -63,4 +63,19 @@ public class BrandController {
         }
     }
 
+    @PutMapping("/update/single/{id}")
+    public ResponseEntity<?> updateBrandNameById(@PathVariable Long id, @RequestBody Brand brand) {
+        System.out.println(id);
+        System.out.println(brand.getBrandName());
+        System.out.println(brand.getBrandLogo());
+
+        boolean updatedBrand = brandService.updateBrandNameById(id, brand);
+
+        if (updatedBrand) {
+            return ResponseEntity.status(HttpStatus.OK).body("Brand name updated under id " + id);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong on our side");
+        }
+    }
+
 }
