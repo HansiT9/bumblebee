@@ -20,7 +20,6 @@ public class CategoryController {
 
     @GetMapping("/name/validate")
     public ResponseEntity<?> validateCategoryName(@RequestParam String categoryName) {
-        System.out.println("in category controller");
         boolean exists = categoryService.checkBrandNameExists(categoryName);
 
         if (exists) {
@@ -59,22 +58,18 @@ public class CategoryController {
         if (deleted) {
             return ResponseEntity.status(HttpStatus.OK).body("Category deleted under brand id " + id);
         } else {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong on our side");
+            return ResponseEntity.status(HttpStatus.OK).body("Something went wrong on our side");
         }
     }
 
     @PutMapping("/update/single/{id}")
     public ResponseEntity<?> updateBrandNameById(@PathVariable Long id, @RequestBody Category category) {
-        System.out.println(id);
-        System.out.println(category.getCategoryName());
-        System.out.println(category.getCategoryLogo());
-
         boolean updatedCategory = categoryService.updateCategoryNameById(id, category);
 
         if (updatedCategory) {
             return ResponseEntity.status(HttpStatus.OK).body("Category name updated under id " + id);
         } else {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong on our side");
+            return ResponseEntity.status(HttpStatus.OK).body("Something went wrong on our side");
         }
     }
 }
