@@ -87,7 +87,6 @@ public class ProductController {
 
     @DeleteMapping("/remove/all_equals_brandname/{brandName}")
     public ResponseEntity<?> removeAllWithBrandName(@PathVariable String brandName) {
-        System.out.println(brandName);
         boolean deleted = productService.deleteAllWithBrandName(brandName);
 
         if (deleted) {
@@ -99,7 +98,6 @@ public class ProductController {
 
     @DeleteMapping("/remove/all_equals_categoryname/{categoryName}")
     public ResponseEntity<?> removeAllWithCategoryName(@PathVariable String categoryName) {
-        System.out.println(categoryName);
         boolean deleted = productService.deleteAllWithCategoryName(categoryName);
 
         if (deleted) {
@@ -120,33 +118,36 @@ public class ProductController {
         }
     }
 
+    @PutMapping("/update/single/{id}")
+    public ResponseEntity<?> updateBrandNameById(@PathVariable Long id, @RequestBody Product product) {
+        boolean updatedProduct = productService.updateProductNameById(id, product);
+
+        if (updatedProduct) {
+            return ResponseEntity.status(HttpStatus.OK).body("Product updated under id " + id);
+        } else {
+            return ResponseEntity.status(HttpStatus.OK).body("Something went wrong on our side");
+        }
+    }
+
     @PutMapping("/update/multiple/brand/{currentBrandName}/{newBrandName}")
     public ResponseEntity<?> updateProductBrandNames(@PathVariable String currentBrandName, @PathVariable String newBrandName) {
-
-        System.out.println("current " + currentBrandName);
-        System.out.println("new " + newBrandName);
-
         boolean updated = productService.updateProductBrandNames(currentBrandName, newBrandName);
 
         if (updated) {
             return ResponseEntity.status(HttpStatus.OK).body("Products under brand name " + currentBrandName + " updated to " + newBrandName);
         } else {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong on our side");
+            return ResponseEntity.status(HttpStatus.OK).body("Something went wrong on our side");
         }
     }
 
     @PutMapping("/update/multiple/category/{currentCategoryName}/{newCategoryName}")
     public ResponseEntity<?> updateProductCategoryNames(@PathVariable String currentCategoryName, @PathVariable String newCategoryName) {
-
-        System.out.println("current " + currentCategoryName);
-        System.out.println("new " + newCategoryName);
-
         boolean updated = productService.updateProductCategoryNames(currentCategoryName, newCategoryName);
 
         if (updated) {
             return ResponseEntity.status(HttpStatus.OK).body("Products under brand name " + currentCategoryName + " updated to " + newCategoryName);
         } else {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong on our side");
+            return ResponseEntity.status(HttpStatus.OK).body("Something went wrong on our side");
         }
     }
 }

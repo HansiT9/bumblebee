@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -129,5 +130,22 @@ public class ProductServiceImpl implements ProductService {
         int updateBrandNames = productRepository.updateCategoryNames(currentCategoryName, newCategoryName);
 
         return  updateBrandNames > 0;
+    }
+
+    @Override
+    public boolean updateProductNameById(Long id, Product product) {
+        Optional<ProductEntity> prductOptional = productRepository.findById(id);
+        if (prductOptional.isPresent()) {
+            ProductEntity productEntity = prductOptional.get();
+            productEntity.setProductName(product.getProductName());
+            productEntity.setProductUrl(product.getProductUrl());
+            productEntity.setProductBrandName(product.getProductBrandName());
+            productEntity.setProductCategoryName(product.getProductCategoryName());
+            productEntity.setProductQty(product.getProductQty());
+
+            ProductEntity savedProduct = productRepository.save(productEntity);
+            return savedProduct != null;
+        }
+        return false;
     }
 }
