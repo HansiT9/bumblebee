@@ -1,5 +1,6 @@
 $(document).ready(function () {
-  $("#formView").hide(); // initially hiding form
+  // initially hiding form
+  $("#formViewSave, #formViewUpdate").hide();
 
   let searchParams = new URLSearchParams(window.location.search);
   let param = searchParams.get("type");
@@ -24,12 +25,12 @@ $(document).ready(function () {
   });
 
   $("#new").click(function () {
-    $("#formView").show();
+    $("#formViewSave").show();
 
-    let nameLabel = $("#nameL");
-    let urlLabel = $("#urlL");
-    let nameInput = $("#name");
-    let q = $("#q");
+    let nameLabel = $("#nameLSave");
+    let urlLabel = $("#urlLSave");
+    let nameInput = $("#nameSave");
+    let q = $("#qSave");
 
     if (param === "brands") {
       formBrandSettings(q, nameLabel, urlLabel, nameInput);
@@ -44,22 +45,22 @@ $(document).ready(function () {
     }
   });
 
-  $("#closeBtn").click(function () {
-    $("#formView").fadeOut();
+  $("#closeBtnSave, #closeBtnUpdate").click(function () {
+    $("#formViewSave").fadeOut();
     location.reload();
   });
 
   let timeout;
-  $("#name").on("input", function () {
+  $("#nameSave").on("input", function () {
     clearTimeout(timeout);
     timeout = setTimeout(function () {
       if (param === "brands") {
-        const name = $("#name").val();
+        const name = $("#nameSave").val();
         const message = "Brand Name Already Exist!";
         validateBrandName(name, message, true);
       }
       if (param === "Categories") {
-        const name = $("#name").val();
+        const name = $("#nameSave").val();
         const message = "Category Name Already Exist!";
         validateCategoryName(name, message, true);
       }
@@ -67,20 +68,20 @@ $(document).ready(function () {
   });
 
   let timeoutBName;
-  $("#brand").on("input", function () {
+  $("#brandSave").on("input", function () {
     clearTimeout(timeoutBName);
     timeoutBName = setTimeout(function () {
-      const name = $("#brand").val();
+      const name = $("#brandSave").val();
       const message = "Brand Name Valid!";
       validateBrandName(name, message, false);
     }, 1000);
   });
 
   let timeoutCName;
-  $("#category").on("input", function () {
+  $("#categorySave").on("input", function () {
     clearTimeout(timeoutCName);
     timeoutCName = setTimeout(function () {
-      const name = $("#category").val();
+      const name = $("#categorySave").val();
       const message = "Category Name Valid!";
       validateCategoryName(name, message, false);
     }, 1000);
@@ -455,52 +456,10 @@ function removeItem(id, param, brandName) {
   }
 }
 
-// validation methods
-function validateBrandName(name, message, needFormat) {
-  if (name !== "") {
-    $.get("http://localhost:8080/brand/name/validate", {
-      brandName: name,
-    })
-      .done(function (data) {
-        console.log("result", data);
-        if (!needFormat) {
-          alert("Brand name not registered!");
-        }
-        $("#brand").val("");
-      })
-      .fail(function () {
-        alert(message);
-        if (needFormat) {
-          $("#name").val("");
-        }
-      });
-  }
-}
-function validateCategoryName(name, message, needFormat) {
-  if (name !== "") {
-    $.get("http://localhost:8080/category/name/validate", {
-      categoryName: name,
-    })
-      .done(function (data) {
-        console.log(data);
-        if (!needFormat) {
-          alert("Category name not registered!");
-        }
-        $("#category").val("");
-      })
-      .fail(function () {
-        alert(message);
-        if (needFormat) {
-          $("#name").val("");
-        }
-      });
-  }
-}
-
 // save methods
 function saveBrand() {
-  const brandName = $("#name").val();
-  let brandUrl = $("#url").val();
+  const brandName = $("#nameSave").val();
+  let brandUrl = $("#urlSave").val();
   console.log("In save brand method");
 
   if (brandUrl === "") {
@@ -528,8 +487,8 @@ function saveBrand() {
     });
 }
 function saveCategory() {
-  const categoryName = $("#name").val();
-  let categoryUrl = $("#url").val();
+  const categoryName = $("#nameSave").val();
+  let categoryUrl = $("#urlSave").val();
 
   if (categoryUrl === "") {
     categoryUrl = "http://localhost:8080/image/categories.png";
@@ -555,11 +514,11 @@ function saveCategory() {
     });
 }
 function saveProduct() {
-  const productName = $("#name").val();
-  let productUrl = $("#url").val();
-  let productBrandName = $("#brand").val();
-  let productCategoryName = $("#category").val();
-  let productQty = $("#quantity").val();
+  const productName = $("#nameSave").val();
+  let productUrl = $("#urlSave").val();
+  let productBrandName = $("#brandSave").val();
+  let productCategoryName = $("#categorySave").val();
+  let productQty = $("#quantitySave").val();
 
   if (productUrl === "") {
     productUrl = "http://localhost:8080/image/product-release.png";
@@ -589,17 +548,39 @@ function saveProduct() {
 }
 
 // update methods
+
 function updateItem(id, param, itemObject) {
   $("#submitBtn").text("Update");
-  $("#formView").show();
+  $("#formViewUpdate").show();
 
-  let nameLabel = $("#nameL");
-  let urlLabel = $("#urlL");
-  let nameInput = $("#name");
-  let q = $("#q");
+  let nameLabel = $("#nameLUpdate");
+  let urlLabel = $("#urlLUpdate");
+  // let nameInput = $("#nameUpdate");
+  // let urlInput = $("#urlUpdate");
+  let q = $("#qUpdate");
 
   if (param === "brands") {
+    // formUpdateSettings();
+    let nameInput = $("#nameUpdate");
+    let urlInput = $("#urlUpdate");
     formBrandSettings(q, nameLabel, urlLabel, nameInput);
+    nameInput.val(itemObject.brandName);
+    urlInput.val(itemObject.brandLogo);
+
+    let timeout;
+    nameInput.on("input", function () {
+      clearTimeout(timeout);
+      timeout = setTimeout(function () {
+        const name = nameInput.val();
+        const message = "Brand Name Already Exist!!";
+        validateBrandName(name, message, false);
+      }, 1000);
+    });
+
+    $("#form-update").submit(function (event) {
+      event.preventDefault();
+      updateBrand(id, itemObject.brandName);
+    });
   }
 
   if (param === "Categories") {
@@ -611,10 +592,55 @@ function updateItem(id, param, itemObject) {
   }
 }
 
+// update Brand
+function updateBrand(id, brandName) {
+  let nameInput = $("#nameUpdate").val();
+  let urlInput = $("#urlUpdate").val();
+
+  console.log("url", urlInput);
+
+  const currentBrandName = brandName;
+  const newBrandName = nameInput;
+  $.ajax({
+    url:
+      "http://localhost:8080/product/update/multiple/brand/" +
+      currentBrandName +
+      "/" +
+      newBrandName,
+    method: "PUT",
+    contentType: "application/json",
+  })
+    .done(function (data) {
+      console.log(data);
+
+      $.ajax({
+        url: "http://localhost:8080/brand/update/single/" + id,
+        method: "PUT",
+        data: JSON.stringify({
+          brandName: nameInput,
+          brandLogo: urlInput,
+        }),
+        contentType: "application/json",
+      })
+        .done(function (data) {
+          console.log(data);
+          alert("Update Successful");
+          $("#formViewSave").fadeOut();
+          location.reload();
+        })
+        .fail(function () {
+          console.log("Update failed");
+        });
+    })
+    .fail(function () {
+      console.log("update failed");
+    });
+}
+
 // Setting changes
 function brandSettings() {
   $("#heading").text("Brands");
-  $("#formHeading").text("Add new Brand");
+  $("#formHeadingSave").text("Add new Brand");
   $("#heading01").text("Brand Name");
   $("#heading02").text("Brand Logo");
   $("#heading03").text("No of Products");
@@ -648,26 +674,79 @@ function productSettings() {
 }
 
 function formBrandSettings(q, nameLabel, urlLabel, nameInput) {
-  $("#pbn").hide();
-  $("#pcn").hide();
+  $("#pbnSave, #pbnUpdate").hide();
+  $("#pcnSave, #pcnUpdate").hide();
   q.hide();
   nameLabel.text("Brand Name:");
   urlLabel.text("Brand Logo:");
   nameInput.attr("placeholder", "Enter brand name");
 }
 function formCategorySettings(q, nameLabel, urlLabel, nameInput) {
-  $("#pbn").hide();
-  $("#pcn").hide();
+  $("#pbnSave, #pbnUpdate").hide();
+  $("#pcnSave, #pcnUpdate").hide();
   q.hide();
   nameLabel.text("Category Name:");
   urlLabel.text("Category Logo:");
   nameInput.attr("placeholder", "Enter category name");
 }
 function formProductSettings(q, nameLabel, urlLabel, nameInput) {
-  $("#pbn").show();
-  $("#pcn").show();
+  $("#pbnSave, #pbnUpdate").show();
+  $("#pcnSave, #pcnUpdate").show();
   q.show();
   nameLabel.text("Product Name:");
   urlLabel.text("Product Logo:");
   nameInput.attr("placeholder", "Enter product name");
+}
+
+// function formUpdateSettings() {
+//   $("#name").attr("id", "nameUpdate");
+//   $("#url").attr("id", "urlUpdate");
+//   $("#form-reg").attr("id", "form-update");
+// }
+
+// validation methods
+function validateBrandName(name, message, needFormat) {
+  console.log(needFormat);
+  if (name !== "") {
+    $.get("http://localhost:8080/brand/name/validate", {
+      brandName: name,
+    })
+      .done(function () {
+        console.log("In pass");
+        if (!needFormat) {
+          console.log("In ! pass");
+          alert("Brand name not registered!");
+        }
+        $("#brandSave").val("");
+      })
+      .fail(function () {
+        alert(message);
+        console.log("In failed");
+        if (needFormat) {
+          console.log("In reset");
+          console.log(needFormat);
+          $("#nameSave").val("");
+        }
+      });
+  }
+}
+function validateCategoryName(name, message, needFormat) {
+  if (name !== "") {
+    $.get("http://localhost:8080/category/name/validate", {
+      categoryName: name,
+    })
+      .done(function (data) {
+        console.log(data);
+        if (!needFormat) {
+          alert("Category name not registered!");
+        }
+        $("#categorySave").val("");
+      })
+      .fail(function () {
+        alert(message);
+        if (needFormat) {
+          $("#nameSave").val("");
+        }
+      });
+  }
 }
