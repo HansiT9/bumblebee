@@ -42,7 +42,7 @@
           <!-- switch start -->
           <div class="switchLan" id="toggle">
             <label class="switch_wrapper" id="toggleLab">
-              <input checked id="switchOption" type="checkbox" />
+              <input id="switchOption" type="checkbox" />
               <span class="switch_slider"></span>
               <div></div>
             </label>
@@ -85,6 +85,7 @@
             <input
               class="form-control"
               id="password"
+              pattern="^(?=.*\d)(?=.*[a-zA-Z])\S{8,}$"
               placeholder="Should have at least 8 characters"
               required
               type="password"
@@ -109,13 +110,9 @@
           </div>
           <button class="btnSubmit" type="submit">Register</button>
         </form>
-        <p>
-          <i class="fa">&#xf06a;</i>Web view only allows customers to register
-          to the system
-        </p>
       </section>
     </main>
     <!-- script to external js file -->
-    <script th:src="@{/js/customerRegister.js}" type="text/javascript"></script>
+    <script th:src="@{/js/Register.js}" type="text/javascript"></script>
   </body>
 </html>

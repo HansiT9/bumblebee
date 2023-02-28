@@ -1,7 +1,10 @@
 package com.system.bumblebee.services.impl;
 
+import com.system.bumblebee.dto.Admin;
 import com.system.bumblebee.dto.Customer;
+import com.system.bumblebee.entity.AdminEntity;
 import com.system.bumblebee.entity.CustomerEntity;
+import com.system.bumblebee.repositories.AdminRepository;
 import com.system.bumblebee.repositories.CustomerRepository;
 import com.system.bumblebee.services.RegistrationService;
 import com.system.bumblebee.util.PasswordEncrypt;
@@ -13,14 +16,41 @@ public class RegistrationServiceImpl implements RegistrationService {
     @Autowired
     private CustomerRepository customerRepository;
 
+    @Autowired
+    private AdminRepository adminRepository;
+
     @Override
-    public boolean checkEmail(String email) {
+    public boolean checkEmailCustomer(String email) {
         CustomerEntity customerEntity = customerRepository.findByEmail(email);
 
         if (customerEntity == null) {
             return false;
         }
         return customerEntity.getEmail().equals(email);
+    }
+
+    @Override
+    public boolean checkEmailAdmin(String email) {
+        AdminEntity adminEntity = adminRepository.findByEmail(email);
+
+        if (adminEntity == null) {
+            return false;
+        }
+        return adminEntity.getEmail().equals(email);
+    }
+
+    @Override
+    public boolean registerAdmin(Admin admin) {
+        AdminEntity adminEntity = new AdminEntity();
+
+        String hashedPassword = PasswordEncrypt.hashPassword(admin.getPassword());
+
+        adminEntity.setEmail(admin.getEmail());
+        adminEntity.setPassword(hashedPassword);
+
+        AdminEntity savedAdmin = adminRepository.save(adminEntity);
+
+        return savedAdmin != null;
     }
 
     @Override

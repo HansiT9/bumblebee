@@ -33,9 +33,20 @@ public class AuthController {
         }
     }
 
+    @GetMapping("/admin/validate")
+    public ResponseEntity<?> validateEmailAdmin(@RequestParam String email) {
+        boolean isAvailable = registerService.checkEmailAdmin(email);
+
+        if (!isAvailable) {
+            return ResponseEntity.status(HttpStatus.OK).body("Email Available!");
+        } else {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Email Already Exist!");
+        }
+    }
+
     @GetMapping("/customer/validate")
-    public ResponseEntity<?> validateEmail(@RequestParam String email) {
-        boolean isAvailable = registerService.checkEmail(email);
+    public ResponseEntity<?> validateEmailCustomer(@RequestParam String email) {
+        boolean isAvailable = registerService.checkEmailCustomer(email);
 
         if (!isAvailable) {
             return ResponseEntity.status(HttpStatus.OK).body("Email Available!");
@@ -48,6 +59,17 @@ public class AuthController {
     public ResponseEntity<?> registerCustomer(@RequestBody Customer customer) {
         boolean registered = registerService.registerCustomer(customer);
 
+
+        if (registered) {
+            return ResponseEntity.status(HttpStatus.OK).body("Registration Successful!");
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while processing your request, please try again later");
+        }
+    }
+
+    @PostMapping("/admin/register")
+    public ResponseEntity<?> registerAdmin (@RequestBody Admin admin) {
+        boolean registered = registerService.registerAdmin(admin);
 
         if (registered) {
             return ResponseEntity.status(HttpStatus.OK).body("Registration Successful!");
