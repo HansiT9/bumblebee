@@ -16,4 +16,6 @@ public interface ProductService {
     boolean deleteAllWithCategoryName(String categoryName);
     List<ProductEntity> fetchAllProducts();
     boolean removeProduct(int id);
+    boolean updateProductBrandNames(String currentBrandName, String newBrandName);
+    boolean updateProductCategoryNames(String currentCategoryName, String newCategoryName);
 }

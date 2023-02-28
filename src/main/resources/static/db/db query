@@ -40,8 +40,6 @@ CREATE TABLE product (
   product_brand_name VARCHAR(255),
   product_category_name VARCHAR(255),
   product_qty INT,
-  CONSTRAINT FK_Product_Brand FOREIGN KEY (product_brand_name) REFERENCES brands (brand_name),
-  CONSTRAINT FK_Product_Category FOREIGN KEY (product_category_name) REFERENCES categories (category_name)
 );
 
 SELECT product_brand_name, COUNT(*) AS productCount

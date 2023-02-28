@@ -115,4 +115,19 @@ public class ProductServiceImpl implements ProductService {
 
         return exist;
     }
+
+    @Override
+    @Transactional
+    public boolean updateProductBrandNames(String currentBrandName, String newBrandName) {
+        int updateBrandNames = productRepository.updateBrandNames(currentBrandName, newBrandName);
+
+        return  updateBrandNames > 0;
+    }
+
+    @Override
+    public boolean updateProductCategoryNames(String currentCategoryName, String newCategoryName) {
+        int updateBrandNames = productRepository.updateCategoryNames(currentCategoryName, newCategoryName);
+
+        return  updateBrandNames > 0;
+    }
 }

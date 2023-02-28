@@ -119,4 +119,34 @@ public class ProductController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong on our side");
         }
     }
+
+    @PutMapping("/update/multiple/brand/{currentBrandName}/{newBrandName}")
+    public ResponseEntity<?> updateProductBrandNames(@PathVariable String currentBrandName, @PathVariable String newBrandName) {
+
+        System.out.println("current " + currentBrandName);
+        System.out.println("new " + newBrandName);
+
+        boolean updated = productService.updateProductBrandNames(currentBrandName, newBrandName);
+
+        if (updated) {
+            return ResponseEntity.status(HttpStatus.OK).body("Products under brand name " + currentBrandName + " updated to " + newBrandName);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong on our side");
+        }
+    }
+
+    @PutMapping("/update/multiple/category/{currentCategoryName}/{newCategoryName}")
+    public ResponseEntity<?> updateProductCategoryNames(@PathVariable String currentCategoryName, @PathVariable String newCategoryName) {
+
+        System.out.println("current " + currentCategoryName);
+        System.out.println("new " + newCategoryName);
+
+        boolean updated = productService.updateProductCategoryNames(currentCategoryName, newCategoryName);
+
+        if (updated) {
+            return ResponseEntity.status(HttpStatus.OK).body("Products under brand name " + currentCategoryName + " updated to " + newCategoryName);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong on our side");
+        }
+    }
 }
