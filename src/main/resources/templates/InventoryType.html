@@ -60,18 +60,18 @@
     </main>
 
     <!--  Popup form  -->
-    <div class="popup" id="formView">
+    <div class="popup" id="formViewSave">
       <div class="addNewForm">
         <div class="controls">
-          <button id="closeBtn">&#x274C;</button>
+          <button id="closeBtnSave">&#x274C;</button>
         </div>
         <form id="form-reg">
-          <h3 id="formHeading">Add new Brand</h3>
+          <h3 id="formHeadingSave">Add new Brand</h3>
           <div class="form-group">
-            <label for="name" id="nameL">Brand Name</label>
+            <label for="nameSave" id="nameLSave">Brand Name</label>
             <input
               class="form-control"
-              id="name"
+              id="nameSave"
               name="name"
               placeholder="Enter brand name"
               required
@@ -79,45 +79,111 @@
             />
           </div>
           <div class="form-group">
-            <label for="url" id="urlL">Brand Logo</label>
+            <label for="urlSave" id="urlLSave">Brand Logo</label>
             <input
               class="form-control"
-              id="url"
+              id="urlSave"
               name="url"
               placeholder="Enter url to background image (300 &#215; 300)"
               type="url"
             />
           </div>
-          <div class="form-group" id="pbn">
-            <label for="brand">Product Brand Name:</label>
+          <div class="form-group" id="pbnSave">
+            <label for="brandSave">Product Brand Name:</label>
             <input
               class="form-control"
-              id="brand"
+              id="brandSave"
               placeholder="Enter brand name of product"
               type="text"
             />
           </div>
-          <div class="form-group" id="pcn">
-            <label for="category">Product Category Name:</label>
+          <div class="form-group" id="pcnSave">
+            <label for="categorySave">Product Category Name:</label>
             <input
               class="form-control"
-              id="category"
+              id="categorySave"
               placeholder="Enter category name of product"
               type="text"
             />
           </div>
-          <div class="form-group" id="q">
-            <label for="quantity" id="quanL">Quantity</label>
+          <div class="form-group" id="qSave">
+            <label for="quantitySave" id="quanLSave">Quantity</label>
             <input
               class="form-control"
-              id="quantity"
+              id="quantitySave"
               max="100"
               min="1"
               placeholder="Enter the number of items (min - 1 and max - 100)"
               type="number"
             />
           </div>
-          <button class="btnSubmit" id="submitBtn" type="submit">Save</button>
+          <button class="btnSubmit" id="submitBtnSave" type="submit">
+            Save
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="popup" id="formViewUpdate">
+      <div class="addNewForm">
+        <div class="controls">
+          <button id="closeBtnUpdate">&#x274C;</button>
+        </div>
+        <form id="form-update">
+          <h3 id="formHeadingUpdate">Add new Brand</h3>
+          <div class="form-group">
+            <label for="nameUpdate" id="nameLUpdate">Brand Name</label>
+            <input
+              class="form-control"
+              id="nameUpdate"
+              name="name"
+              placeholder="Enter brand name"
+              required
+              type="text"
+            />
+          </div>
+          <div class="form-group">
+            <label for="urlUpdate" id="urlLUpdate">Brand Logo</label>
+            <input
+              class="form-control"
+              id="urlUpdate"
+              name="url"
+              placeholder="Enter url to background image (300 &#215; 300)"
+              type="url"
+            />
+          </div>
+          <div class="form-group" id="pbnUpdate">
+            <label for="brandUpdate">Product Brand Name:</label>
+            <input
+              class="form-control"
+              id="brandUpdate"
+              placeholder="Enter brand name of product"
+              type="text"
+            />
+          </div>
+          <div class="form-group" id="pcnUpdate">
+            <label for="categoryUpdate">Product Category Name:</label>
+            <input
+              class="form-control"
+              id="categoryUpdate"
+              placeholder="Enter category name of product"
+              type="text"
+            />
+          </div>
+          <div class="form-group" id="qUpdate">
+            <label for="quantityUpdate" id="quanLUpdate">Quantity</label>
+            <input
+              class="form-control"
+              id="quantityUpdate"
+              max="100"
+              min="1"
+              placeholder="Enter the number of items (min - 1 and max - 100)"
+              type="number"
+            />
+          </div>
+          <button class="btnSubmit" id="submitBtnUpdate" type="submit">
+            Save
+          </button>
         </form>
       </div>
     </div>
