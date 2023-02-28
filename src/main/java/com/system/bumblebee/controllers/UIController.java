@@ -39,7 +39,6 @@ public class UIController {
     @GetMapping(value = "/inventory_details")
     public String getInventoryDetails() {
         return "InventoryDetails";
-
     }
     @GetMapping(value = "/inventory_type")
     public String getInventoryType(@RequestParam String type, Model model) {
