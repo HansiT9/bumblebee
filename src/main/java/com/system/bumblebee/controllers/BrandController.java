@@ -1,3 +1,4 @@
+// Define the package and import necessary classes
 package com.system.bumblebee.controllers;
 
 import com.system.bumblebee.dto.Brand;
@@ -9,15 +10,20 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+// Define the RestController and set the base URL
 @RestController
 @RequestMapping("/brand")
 public class BrandController {
+
+    // Inject the necessary services
     private final BrandService brandService;
 
+    // Constructor to inject the services
     public BrandController(BrandService brandService) {
         this.brandService = brandService;
     }
 
+    // Define the GET mapping to validate the brand name
     @GetMapping("/name/validate")
     public ResponseEntity<?> validateBrandName(@RequestParam String brandName) {
         boolean exists = brandService.checkBrandNameExists(brandName);
@@ -29,6 +35,7 @@ public class BrandController {
         }
     }
 
+    // Define the GET mapping to fetch all brands
     @GetMapping("/all")
     public ResponseEntity<?> fetchAllBrands() {
         List<BrandEntity> brands = brandService.fetchAllBrands();
@@ -40,6 +47,7 @@ public class BrandController {
         }
     }
 
+    // Define the POST mapping to create a new brand
     @PostMapping("/new")
     public ResponseEntity<?> createBrand(@RequestBody Brand brand) {
         boolean created = brandService.saveBrand(brand);
@@ -51,8 +59,9 @@ public class BrandController {
         }
     }
 
+    // Define the DELETE mapping to remove a brand by id
     @DeleteMapping("/remove/single/{id}")
-    public ResponseEntity<?> removeAllWithBrandName(@PathVariable String id) {
+    public ResponseEntity<?> removeAllWithId(@PathVariable String id) {
         boolean deleted = brandService.removeBrand(Integer.parseInt(id));
 
         if (deleted) {
@@ -62,6 +71,7 @@ public class BrandController {
         }
     }
 
+    // Define the PUT mapping to update a brand name by id
     @PutMapping("/update/single/{id}")
     public ResponseEntity<?> updateBrandNameById(@PathVariable Long id, @RequestBody Brand brand) {
         boolean updatedBrand = brandService.updateBrandNameById(id, brand);

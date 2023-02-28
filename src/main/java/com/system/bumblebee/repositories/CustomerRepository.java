@@ -7,11 +7,12 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
+// Defined a repository interface for CustomerEntity
+@Repository // Spring Data annotation to mark the interface as a repository
 public interface CustomerRepository extends JpaRepository<CustomerEntity, Long> {
 
-    CustomerEntity findByEmail(String email);
-    CustomerEntity save(CustomerEntity customer);
-    List<CustomerEntity> findAll();
-    Optional<CustomerEntity> findById(Long cusID);
+    CustomerEntity findByEmail(String email); // method to find customer entity by email
+    CustomerEntity save(CustomerEntity customer); // method to save customer entity
+    List<CustomerEntity> findAll(); // method to find all customer entities
+    Optional<CustomerEntity> findById(Long cusID); // method to find customer entity by id
 }

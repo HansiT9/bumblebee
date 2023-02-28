@@ -7,9 +7,11 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+// This class provides a method for hashing passwords using the SHA-256 algorithm.
 public class PasswordEncrypt {
     private static final Logger logger = LoggerFactory.getLogger(PasswordEncrypt.class);
 
+    // Hashes the given password using the SHA-256 algorithm.
     public static String hashPassword(String password) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");

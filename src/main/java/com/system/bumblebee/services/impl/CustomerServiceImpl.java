@@ -15,6 +15,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
 
+    // Fetch all customers from database
     @Override
     public List<CustomerEntity> fetchAllCustomers() {
         List<CustomerEntity> customers = customerRepository.findAll();
@@ -22,6 +23,7 @@ public class CustomerServiceImpl implements CustomerService {
         return customers;
     }
 
+    // Fetch a single customer by ID from database
     @Override
     public Optional<CustomerEntity> fetchSingleCustomer(Long cusID) {
         Optional<CustomerEntity> customer = customerRepository.findById(cusID);
