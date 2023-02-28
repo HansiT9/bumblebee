@@ -1,4 +1,8 @@
 $(document).ready(function () {
+  if (sessionStorage.getItem("loggedIn") === true) {
+    location.href = "http://localhost:8080/admin_center";
+  }
+
   // default view
   $("#fullNameGroup, #dobGroup, #installment").hide();
   $("#fullName, #dob").prop("disabled", true);

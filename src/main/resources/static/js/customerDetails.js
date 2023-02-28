@@ -1,4 +1,22 @@
 $(document).ready(function () {
+  $(".loginControl").hide();
+  $("#loggedInAs").text("Logged in as " + sessionStorage.getItem("email"));
+
+  if (sessionStorage.getItem("loggedIn") === true) {
+    $(".loggedInControl").show();
+  }
+
+  if (sessionStorage.getItem("loggedIn") === "n/a") {
+    location.href = "http://localhost:8080/admin_login";
+  }
+
+  $(".logout").click(function () {
+    console.log("logged out");
+    sessionStorage.setItem("loggedIn", "n/a");
+    window.history.replaceState(null, null, "http://localhost:8080/");
+    location.href = window.location;
+  });
+
   $.get("http://localhost:8080/customer/all")
     .done(function (data) {
       if (data.length === 0) {

@@ -1,6 +1,5 @@
 package com.system.bumblebee.controllers;
 
-import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,38 +12,20 @@ public class UIController {
         return "Home";
     }
     @GetMapping(value = "/admin_login")
-    public String getAdminLogin(HttpSession session) {
-        String sessionEmail = (String) session.getAttribute("email");
-
-//        if (sessionEmail == null) {
-            return "AdminLogin";
-//        } else {
-//            return "redirect:/AdminCenter";
-//        }
+    public String getAdminLogin() {
+        return "AdminLogin";
     }
     @GetMapping(value = "/admin_center")
-    public String getAdminCenter(HttpSession session) {
-        String sessionEmail = (String) session.getAttribute("email");
-
-//        if (sessionEmail == null) {
-//            return "redirect:/AdminLogin";
-//        } else {
-            return "AdminCenter";
-//        }
+    public String getAdminCenter() {
+        return "AdminCenter";
     }
     @GetMapping(value = "/register")
     public String getCustomerRegister() {
         return "Register";
     }
     @GetMapping(value = "/customer_details")
-    public String getCustomerDetails(HttpSession session) {
-        String sessionEmail = (String) session.getAttribute("email");
-
-//        if (sessionEmail == null) {
-//            return "redirect:/AdminLogin";
-//        } else {
-            return "CustomerDetails";
-//        }
+    public String getCustomerDetails() {
+        return "CustomerDetails";
     }
     @GetMapping(value = "/registration_success")
     public String getRegistrationSuccess() {
@@ -58,6 +39,7 @@ public class UIController {
     @GetMapping(value = "/inventory_details")
     public String getInventoryDetails() {
         return "InventoryDetails";
+
     }
     @GetMapping(value = "/inventory_type")
     public String getInventoryType(@RequestParam String type, Model model) {

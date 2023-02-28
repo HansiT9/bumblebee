@@ -18,6 +18,8 @@
       rel="stylesheet"
       th:href="@{/css/home.css}"
     />
+    <!-- script to jquery file -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   </head>
   <body>
     <header>
@@ -25,9 +27,13 @@
         <ul id="logo">
           <li><a href="http://localhost:8080/">Bumble-Bee</a></li>
         </ul>
-        <ul id="userControl">
+        <ul class="loginControl" id="userControl">
           <li><a href="http://localhost:8080/admin_login">Login</a></li>
           <li><a href="http://localhost:8080/register">Register</a></li>
+        </ul>
+        <ul class="loggedInControl">
+          <li><h3 id="loggedInAs">Logged in as asd@gmail.com</h3></li>
+          <li><button class="logout"><ion-icon name="log-out-outline"></ion-icon></button></li>
         </ul>
       </nav>
     </header>
@@ -38,9 +44,24 @@
             <h1>Buy first and pay later with</h1>
             <h1 id="appName">Bumble-Bee</h1>
           </div>
-          <p>Shop now and pay later with just a few clicks using our convenient online buy first pay later Mobile Application.</p>
+          <p>
+            Shop now and pay later with just a few clicks using our convenient
+            online buy first pay later Mobile Application.
+          </p>
         </div>
       </section>
     </main>
+    <script src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js" type="module"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script>
+      $(document).ready(function () {
+        sessionStorage.setItem("loggedIn", "n/a");
+        $(".loggedInControl").hide();
+
+        if (sessionStorage.getItem("loggedIn") === true) {
+          location.href = "http://localhost:8080/admin_center";
+        }
+      });
+    </script>
   </body>
 </html>

@@ -49,3 +49,28 @@ nav {
   color: var(--default-links) !important;
   font-weight: 600;
 }
+
+.loggedInControl {
+  display: flex;
+  align-items: center;
+  width: 20%;
+  justify-content: space-evenly;
+}
+
+.loggedInControl li {
+  list-style: none;
+}
+
+.loggedInControl button {
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+}
+
+.loggedInControl ion-icon {
+  font-size: 35px;
+  color: var(--default-yello);
+}

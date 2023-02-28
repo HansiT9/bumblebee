@@ -1,3 +1,8 @@
+$(document).ready(function () {
+  if (sessionStorage.getItem("loggedIn") === true) {
+    location.href = "http://localhost:8080/admin_center";
+  }
+});
 $("#login-form").submit(function (event) {
   event.preventDefault();
 
@@ -15,6 +20,8 @@ $("#login-form").submit(function (event) {
   })
     .done(function (data) {
       console.log("Login successful:", data);
+      sessionStorage.setItem("loggedIn", true);
+      sessionStorage.setItem("email", email);
       window.location.href = "http://localhost:8080/admin_center";
     })
     .fail(function (error) {

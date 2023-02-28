@@ -18,31 +18,77 @@
       rel="stylesheet"
       th:href="@{/css/adminCenter.css}"
     />
+    <!-- script to jquery file -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   </head>
   <body>
-  <header>
-    <nav>
-      <ul id="logo">
-        <li><a href="http://localhost:8080/">Bumble-Bee</a></li>
-      </ul>
-      <ul id="userControl">
-        <li><a href="http://localhost:8080/admin_login">Login</a></li>
-        <li><a href="http://localhost:8080/register">Register</a></li>
-      </ul>
-    </nav>
-  </header>
+    <header>
+      <nav>
+        <ul id="logo">
+          <li><a href="http://localhost:8080/">Bumble-Bee</a></li>
+        </ul>
+        <ul class="loginControl" id="userControl">
+          <li><a href="http://localhost:8080/admin_login">Login</a></li>
+          <li><a href="http://localhost:8080/register">Register</a></li>
+        </ul>
+        <ul class="loggedInControl">
+          <li><h3 id="loggedInAs">Logged in as asd@gmail.com</h3></li>
+          <li>
+            <button class="logout">
+              <ion-icon name="log-out-outline"></ion-icon>
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </header>
     <main>
       <section>
         <h1>Admin Center</h1>
       </section>
       <section>
         <div class="card">
-          <a href="http://localhost:8080/customer_details">View Customer Details</a>
+          <a href="http://localhost:8080/customer_details"
+            >View Customer Details</a
+          >
         </div>
         <div class="card">
-          <a href="http://localhost:8080/inventory_details">View All Inventory</a>
+          <a href="http://localhost:8080/inventory_details"
+            >View All Inventory</a
+          >
         </div>
       </section>
     </main>
+    <script
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+      type="module"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+    <script>
+      $(document).ready(function () {
+        $(".loginControl").hide();
+        $("#loggedInAs").text(
+          "Logged in as " + sessionStorage.getItem("email")
+        );
+
+        if (sessionStorage.getItem("loggedIn") === true) {
+          $(".loggedInControl").show();
+        }
+
+        if (sessionStorage.getItem("loggedIn") === "n/a") {
+          console.log("in logged out");
+          location.href = "http://localhost:8080/admin_login";
+        }
+
+        $(".logout").click(function () {
+          console.log("logged out");
+          sessionStorage.setItem("loggedIn", "n/a");
+          window.history.replaceState(null, null, "http://localhost:8080/");
+          location.href = window.location;
+        });
+      });
+    </script>
   </body>
 </html>
