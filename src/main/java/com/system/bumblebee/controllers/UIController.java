@@ -32,9 +32,9 @@ public class UIController {
             return "AdminCenter";
 //        }
     }
-    @GetMapping(value = "/customer_register")
+    @GetMapping(value = "/register")
     public String getCustomerRegister() {
-        return "CustomerRegister";
+        return "Register";
     }
     @GetMapping(value = "/customer_details")
     public String getCustomerDetails(HttpSession session) {

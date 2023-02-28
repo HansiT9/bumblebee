@@ -42,13 +42,13 @@
           <!-- switch start -->
           <div class="switchLan" id="toggle">
             <label class="switch_wrapper" id="toggleLab">
-              <input checked disabled id="switchOption" type="checkbox" />
+              <input checked id="switchOption" type="checkbox" />
               <span class="switch_slider"></span>
               <div></div>
             </label>
           </div>
           <!-- switch End -->
-          <div class="form-group">
+          <div class="form-group" id="fullNameGroup">
             <label for="fullName">Customer Full Name:</label>
             <input
               class="form-control"
@@ -58,7 +58,7 @@
               type="text"
             />
           </div>
-          <div class="form-group">
+          <div class="form-group" id="dobGroup">
             <label for="dob">Customer Date of Birth:</label>
             <input
               class="form-control"
@@ -70,7 +70,7 @@
             />
           </div>
           <div class="form-group">
-            <label for="email">Customer Email:</label>
+            <label for="email" id="emailLabel">Customer Email:</label>
             <input
               class="form-control"
               id="email"
@@ -81,7 +81,7 @@
             />
           </div>
           <div class="form-group">
-            <label for="password">Customer Password:</label>
+            <label for="password" id="passwordLabel">Customer Password:</label>
             <input
               class="form-control"
               id="password"
