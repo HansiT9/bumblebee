@@ -825,12 +825,6 @@ function formProductSettings(q, nameLabel, urlLabel, nameInput) {
   nameInput.attr("placeholder", "Enter product name");
 }
 
-// function formUpdateSettings() {
-//   $("#name").attr("id", "nameUpdate");
-//   $("#url").attr("id", "urlUpdate");
-//   $("#form-reg").attr("id", "form-update");
-// }
-
 // validation methods
 function validateBrandName(name, message, needFormat) {
   if (name !== "") {
