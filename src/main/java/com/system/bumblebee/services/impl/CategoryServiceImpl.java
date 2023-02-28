@@ -47,4 +47,18 @@ public class CategoryServiceImpl implements CategoryService {
 
         return exist;
     }
+
+    @Override
+    public boolean updateCategoryNameById(Long id, Category category) {
+        Optional<CategoryEntity> categoryOptional = categoryRepository.findById(id);
+        if (categoryOptional.isPresent()) {
+            CategoryEntity categoryEntity = categoryOptional.get();
+            categoryEntity.setCategoryName(category.getCategoryName());
+            categoryEntity.setCategoryLogo(category.getCategoryLogo());
+
+            CategoryEntity savedCategory = categoryRepository.save(categoryEntity);
+            return savedCategory != null;
+        }
+        return false;
+    }
 }

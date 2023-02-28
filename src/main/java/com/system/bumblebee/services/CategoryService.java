@@ -10,4 +10,5 @@ public interface CategoryService {
     boolean saveCategory(Category category);
     boolean removeCategory(int id);
     List<CategoryEntity> fetchAllCategories();
+    boolean updateCategoryNameById(Long id, Category category);
 }
