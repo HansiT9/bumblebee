@@ -39,13 +39,12 @@
       <section class="formSide">
         <form id="form-reg">
           <h3>Register</h3>
-          <!-- switch start -->
-          <div class="switchLan" id="toggle">
-            <label class="switch_wrapper" id="toggleLab">
-              <input id="switchOption" type="checkbox" />
-              <span class="switch_slider"></span>
-              <div></div>
-            </label>
+          <div class="wrapper">
+            <p>Admin</p>
+            <div class="switch_box box_2">
+              <input class="switch_2" id="switchOption" type="checkbox"/>
+            </div>
+            <p>Customer</p>
           </div>
           <!-- switch End -->
           <div class="form-group" id="fullNameGroup">
@@ -86,7 +85,7 @@
               class="form-control"
               id="password"
               pattern="^(?=.*\d)(?=.*[a-zA-Z])\S{8,}$"
-              placeholder="Should have at least 8 characters"
+              placeholder="At least 8 characters (Include at least 1 digit or character)"
               required
               type="password"
             />

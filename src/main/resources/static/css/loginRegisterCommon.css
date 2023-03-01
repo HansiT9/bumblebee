@@ -27,90 +27,6 @@ section {
     padding: 30px 10px;
 }
 
-
-/* switch related styles */
-.switchLan {
-    display: flex;
-    justify-content: center;
-    z-index: 2;
-    margin-top: 20px;
-}
-
-.switch_wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-    width: 40%;
-    height: 35px;
-    background-color: var(--default-blue);
-    border: 1px solid var(--default-yello);
-    /*box-sizing: border-box;*/
-    border-radius: 28px;
-    margin: 0 0.5em 0 0;
-}
-
-.switch_wrapper input {
-    display: none;
-}
-
-.switch_wrapper input:checked + .switch_slider:before {
-    transform: translate(98%);
-}
-
-.switch_wrapper input:checked ~ div:after {
-    color: rgba(243, 241, 241, 0.89);
-    transition: color 0.3s ease 0s;
-}
-
-.switchLan div::before {
-    content: "Admin";
-    position: relative;
-    z-index: 2;
-    font-weight: 700;
-    font-size: 15px;
-    color: #ffffff;
-    /*bottom: -2px;*/
-    left: 30%;
-    cursor: pointer;
-    transition: color 0.3s ease 0s;
-}
-
-.switchLan div::after {
-    content: "Customer";
-    position: relative;
-    z-index: 2;
-    font-weight: 700;
-    font-size: 15px;
-    color: #919191;
-    /*bottom: -2px;*/
-    left: 75%;
-    cursor: pointer;
-    transition: color 0.3s ease 0s;
-}
-
-.switch_slider {
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    transition: 0.4s;
-    border-radius: 34px;
-}
-
-.switch_slider::before {
-    position: absolute;
-    content: "";
-    width: 50%;
-    height: 34px;
-    left: 1px;
-    bottom: 1px;
-    background-color: rgba(6, 53, 114, 0.918);
-    transition: all 0.4s ease 0s;
-    border-radius: 38px;
-}
-
-
 /* form related styles */
 
 .formSide {
@@ -141,11 +57,100 @@ form {
     /*box-shadow: #f2de46 0px 4px 16px, #f2de46 0px 8px 32px;*/
 }
 
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+    /* CSS rules for small desktop screens go here */
+    form {
+        width: 70%;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    form {
+        width: 70%;
+    }
+}
+
 form h3 {
     font-size: 1.5rem;
     text-align: center;
     margin-top: 20%;
 }
+
+/* switch */
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 30px;
+    margin-top: 20px;
+}
+
+.wrapper p {
+    margin-bottom: 30px;
+    color: white;
+    font-weight: 600;
+}
+
+.switch_box {
+    margin: 0 10px;
+}
+
+input[type="checkbox"].switch_2 {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 50px; /* change width to 50% of original */
+    height: 4px; /* change height to 50% of original */
+    background: #444;
+    border-radius: 5px;
+    position: relative;
+    outline: 0;
+    cursor: pointer;
+}
+
+input[type="checkbox"].switch_2:before,
+input[type="checkbox"].switch_2:after {
+    position: absolute;
+    content: "";
+    -webkit-transition: all 0.25s;
+    transition: all 0.25s;
+}
+
+input[type="checkbox"].switch_2:before {
+    width: 20px; /* change to 50% of original */
+    height: 20px; /* change to 50% of original */
+    background: #ccc;
+    border: 2.5px solid #666; /* change to 50% of original */
+    border-radius: 50%;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+}
+
+input[type="checkbox"].switch_2:after {
+    width: 15px; /* change to 50% of original */
+    height: 15px; /* change to 50% of original */
+    background: #666;
+    border-radius: 50%;
+    top: 50%;
+    left: 5px; /* change to 50% of original */
+    transform: scale(1) translateY(-50%);
+    -webkit-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+}
+
+input[type="checkbox"].switch_2:checked:before {
+    left: calc(100% - 17.5px); /* change to 50% of original */
+}
+
+input[type="checkbox"].switch_2:checked:after {
+    left: 37.5px; /* change to 50% of original */
+    transform: scale(0);
+}
+
+
 
 /* form group - input part related styles */
 
@@ -190,3 +195,6 @@ form h3 {
     background-color: var(--default-yello);
     color: var(--default-blue);
 }
+
+
+
