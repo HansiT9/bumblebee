@@ -4,25 +4,33 @@ $(document).ready(function () {
   }
 
   // default view
-  $("#fullNameGroup, #dobGroup, #installment").hide();
-  $("#fullName, #dob").prop("disabled", true);
-  $("#emailLabel").text("Admin Email:");
-  $("#passwordLabel").text("Admin Password:");
+  $("#formCustomer").hide();
+  $("#fullName, #dob, #email, #password").prop("required", false);
+  $("#emailAdmin, #passwordAdmin").prop("required", true);
   sessionStorage.setItem("type", "admin");
 
   // switch between admin and customer register
   $("#switchOption").change(function () {
     if ($(this).is(":checked")) {
-      $("#fullNameGroup, #dobGroup, #installment").show();
-      $("#fullName, #dob").prop("disabled", false);
-      $("#emailLabel").text("Customer Email:");
-      $("#passwordLabel").text("Customer Password:");
+      $("#formCustomer").show();
+      $("#formAdmin").hide();
+      $("#fullName, #dob, #email, #password").prop("required", true);
+      $("#emailAdmin, #passwordAdmin").prop("required", false);
+      // $("#fullNameGroup, #dobGroup, #installment").show();
+      // $("#fullName, #dob").prop("disabled", false);
+      // $("#emailLabel").text("Customer Email:");
+      // $("#passwordLabel").text("Customer Password:");
+
       sessionStorage.setItem("type", "customer");
     } else {
-      $("#fullNameGroup, #dobGroup, #installment").hide();
-      $("#fullName, #dob").prop("disabled", true);
-      $("#emailLabel").text("Admin Email:");
-      $("#passwordLabel").text("Admin Password:");
+      $("#formCustomer").hide();
+      $("#formAdmin").show();
+      $("#fullName, #dob, #email, #password").prop("required", false);
+      $("#emailAdmin, #passwordAdmin").prop("required", true);
+      // $("#fullNameGroup, #dobGroup, #installment").hide();
+      // $("#fullName, #dob").prop("disabled", true);
+      // $("#emailLabel").text("Admin Email:");
+      // $("#passwordLabel").text("Admin Password:");
       sessionStorage.setItem("type", "admin");
     }
   });
@@ -30,6 +38,7 @@ $(document).ready(function () {
   // Validate email with database
   let timeoutIdEmail;
   $("#email").on("input", function () {
+    console.log("in customer email validation");
     const email = $(this).val();
     const patternEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     clearTimeout(timeoutIdEmail);
@@ -41,10 +50,22 @@ $(document).ready(function () {
           })
             .done(function (data) {})
             .fail(function () {
-              alert("Email Already Exist!");
+              alert("Customer Email Already Exist!");
               $("#email").val("");
             });
         }
+      }
+    }, 1000);
+  });
+
+  let timeoutIdAdmin;
+  $("#emailAdmin").on("input", function () {
+    console.log("in Admin email validation");
+    const email = $(this).val();
+    const patternEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    clearTimeout(timeoutIdAdmin);
+    timeoutIdAdmin = setTimeout(function () {
+      if (email !== "" && patternEmail.test(email)) {
         if (sessionStorage.getItem("type") === "admin") {
           $.get("http://localhost:8080/auth/admin/validate", {
             email: email,
@@ -52,11 +73,11 @@ $(document).ready(function () {
             .done(function (data) {})
             .fail(function () {
               alert("Email Already Exist!");
-              $("#email").val("");
+              $("#emailAdmin").val("");
             });
         }
       }
-    }, 1000);
+    });
   });
 
   // by default the installment plan is hidden
@@ -90,7 +111,11 @@ $(document).ready(function () {
 $("#form-reg").submit(function (event) {
   event.preventDefault();
 
-  if (sessionStorage.getItem("type" === "customer")) {
+  const type = sessionStorage.getItem("type");
+  console.log(type);
+
+  if (type === "customer") {
+    console.log("in customer register");
     const fullName = $("#fullName").val();
     const dob = $("#dob").val();
     const email = $("#email").val();
@@ -101,6 +126,8 @@ $("#form-reg").submit(function (event) {
     if (installmentPlan === undefined) {
       installmentPlan = "n/a";
     }
+
+    console.log("in customer register");
 
     $.ajax({
       url: "http://localhost:8080/auth/customer/register",
@@ -115,7 +142,7 @@ $("#form-reg").submit(function (event) {
       contentType: "application/json",
     })
       .done(function () {
-        alert("Registration successful");
+        alert("Customer registration successful");
         window.location.href = "http://localhost:8080/registration_success";
       })
       .fail(function () {
@@ -123,9 +150,9 @@ $("#form-reg").submit(function (event) {
       });
   }
 
-  if (sessionStorage.getItem("type") === "admin") {
-    const email = $("#email").val();
-    const password = $("#password").val();
+  if (type === "admin") {
+    const email = $("#emailAdmin").val();
+    const password = $("#passwordAdmin ").val();
 
     $.ajax({
       url: "http://localhost:8080/auth/admin/register",
@@ -137,7 +164,7 @@ $("#form-reg").submit(function (event) {
       contentType: "application/json",
     })
       .done(function () {
-        alert("Registration successful");
+        alert("Admin registration successful");
         window.location.href = "http://localhost:8080/admin_login";
       })
       .fail(function () {

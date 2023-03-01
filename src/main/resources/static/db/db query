@@ -1,8 +1,8 @@
-show databases
+show databases;
 
-create database bumblebee
+create database bumblebee;
 
-use bumblebee
+use bumblebee;
 
 CREATE TABLE admin (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -39,7 +39,7 @@ CREATE TABLE product (
   product_url VARCHAR(255),
   product_brand_name VARCHAR(255),
   product_category_name VARCHAR(255),
-  product_qty INT,
+  product_qty INT
 );
 
 SELECT product_brand_name, COUNT(*) AS productCount

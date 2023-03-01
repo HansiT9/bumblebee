@@ -69,6 +69,9 @@ public class AuthController {
     // Endpoint to handle register requests for customer
     @PostMapping("/customer/register")
     public ResponseEntity<?> registerCustomer(@RequestBody Customer customer) {
+
+        System.out.println(customer.toString());
+
         // Register the Customer
         boolean registered = registerService.registerCustomer(customer);
 
@@ -83,6 +86,9 @@ public class AuthController {
     // Endpoint to handle register requests for admin users
     @PostMapping("/admin/register")
     public ResponseEntity<?> registerAdmin (@RequestBody Admin admin) {
+
+        System.out.println(admin.toString());
+
         // Register the admin user
         boolean registered = registerService.registerAdmin(admin);
 

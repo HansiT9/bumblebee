@@ -42,71 +42,105 @@
           <div class="wrapper">
             <p>Admin</p>
             <div class="switch_box box_2">
-              <input class="switch_2" id="switchOption" type="checkbox"/>
+              <input class="switch_2" id="switchOption" type="checkbox" />
             </div>
             <p>Customer</p>
           </div>
           <!-- switch End -->
-          <div class="form-group" id="fullNameGroup">
-            <label for="fullName">Customer Full Name:</label>
-            <input
-              class="form-control"
-              id="fullName"
-              placeholder="Enter your full name"
-              required
-              type="text"
-            />
+          <!--    ////////////////////////////      -->
+          <div id="formAdmin">
+            <div class="form-group">
+              <label for="emailAdmin" id="adminEmailLabel"
+                >Admin Email:</label
+              >
+              <input
+                class="form-control"
+                id="emailAdmin"
+                pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
+                placeholder="example@mail.com"
+                required
+                type="email"
+              />
+            </div>
+            <div class="form-group">
+              <label for="passwordAdmin" id="adminPasswordLabel"
+                >Admin Password:</label>
+              <input
+                class="form-control"
+                id="passwordAdmin"
+                pattern="^(?=.*\d)(?=.*[a-zA-Z])\S{8,}$"
+                placeholder="At least 8 characters (Include at least 1 digit or character)"
+                required
+                type="password"
+              />
+            </div>
           </div>
-          <div class="form-group" id="dobGroup">
-            <label for="dob">Customer Date of Birth:</label>
-            <input
-              class="form-control"
-              id="dob"
-              pattern="^(19|20)\d{2}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$"
-              placeholder="yyyy-mm-dd"
-              required
-              type="text"
-            />
-          </div>
-          <div class="form-group">
-            <label for="email" id="emailLabel">Customer Email:</label>
-            <input
-              class="form-control"
-              id="email"
-              pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
-              placeholder="example@mail.com"
-              required
-              type="email"
-            />
-          </div>
-          <div class="form-group">
-            <label for="password" id="passwordLabel">Customer Password:</label>
-            <input
-              class="form-control"
-              id="password"
-              pattern="^(?=.*\d)(?=.*[a-zA-Z])\S{8,}$"
-              placeholder="At least 8 characters (Include at least 1 digit or character)"
-              required
-              type="password"
-            />
-          </div>
-          <div class="form-group" id="installment">
-            <label>Installment Plan:</label>
-            <div class="radioSet">
-              <div class="rdButton">
-                <input id="m3" name="plan" type="radio" />
-                <label class="btn btn-default" for="m3">3 Months</label>
-              </div>
-              <div class="rdButton">
-                <input id="m6" name="plan" type="radio" />
-                <label class="btn btn-default" for="m6">6 Months</label>
-              </div>
-              <div class="rdButton">
-                <input id="m12" name="plan" type="radio" />
-                <label class="btn btn-default" for="m12">12 Months</label>
+          <!--    ////////////////////////////      -->
+          <div id="formCustomer">
+            <div class="form-group" id="fullNameGroup">
+              <label for="fullName">Customer Full Name:</label>
+              <input
+                class="form-control"
+                id="fullName"
+                placeholder="Enter your full name"
+                required
+                type="text"
+              />
+            </div>
+            <div class="form-group" id="dobGroup">
+              <label for="dob">Customer Date of Birth:</label>
+              <input
+                class="form-control"
+                id="dob"
+                pattern="^(19|20)\d{2}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$"
+                placeholder="yyyy-mm-dd"
+                required
+                type="text"
+              />
+            </div>
+            <div class="form-group">
+              <label for="email" id="emailLabel">Customer Email:</label>
+              <input
+                class="form-control"
+                id="email"
+                pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
+                placeholder="example@mail.com"
+                required
+                type="email"
+              />
+            </div>
+            <div class="form-group">
+              <label for="password" id="passwordLabel"
+                >Customer Password:</label
+              >
+              <input
+                class="form-control"
+                id="password"
+                pattern="^(?=.*\d)(?=.*[a-zA-Z])\S{8,}$"
+                placeholder="At least 8 characters (Include at least 1 digit or character)"
+                required
+                type="password"
+              />
+            </div>
+            <div class="form-group" id="installment">
+              <label>Installment Plan:</label>
+              <div class="radioSet">
+                <div class="rdButton">
+                  <input id="m3" name="plan" type="radio" />
+                  <label class="btn btn-default" for="m3">3 Months</label>
+                </div>
+                <div class="rdButton">
+                  <input id="m6" name="plan" type="radio" />
+                  <label class="btn btn-default" for="m6">6 Months</label>
+                </div>
+                <div class="rdButton">
+                  <input id="m12" name="plan" type="radio" />
+                  <label class="btn btn-default" for="m12">12 Months</label>
+                </div>
               </div>
             </div>
           </div>
+          <!--    ////////////////////////////      -->
           <button class="btnSubmit" type="submit">Register</button>
         </form>
       </section>

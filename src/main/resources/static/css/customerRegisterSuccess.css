@@ -5,6 +5,7 @@ main {
     background-size: contain;
     background-repeat: no-repeat;
 }
+
 main section {
     flex: 1;
     display: flex;
@@ -18,6 +19,77 @@ main section {
     align-items: center;
     margin-left: 30%;
 }
+
+@media only screen and (min-width: 1200px) {
+    /* CSS rules for large desktop screens go here */
+    .subSec {
+        margin-left: 30%;
+    }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+    /* CSS rules for small desktop screens go here */
+    h1 {
+        color: var(--default-red);
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    /* CSS rules for tablets go here */
+    #logoText {
+        color: var(--default-red)!important;
+    }
+
+    .subSec:nth-child(1) {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    /* CSS rules for mobile devices go here */
+    #logoText {
+        font-size: 40px !important;
+        color: var(--default-red)!important;
+    }
+
+    .subSec {
+        margin-right: 20%;
+        font-size: 1rem !important;
+        text-align: center;
+        color: var(--default-red)!important;
+    }
+
+    .subSec:nth-child(1) {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .subSec:nth-child(2) {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+
+    main section {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 50%;
+        margin-right: 8%;
+    }
+
+    main {
+        flex: 1;
+        display: flex;
+        background-image: url("data:image/svg+xml;utf8,<svg id='10015.io' viewBox='0 0 480 480' xmlns='http://www.w3.org/2000/svg'><path fill='%23f2de46' d='M404.5,294.5Q370,349,323.5,400.5Q277,452,202,444Q127,436,113,363.5Q99,291,58,225Q17,159,88,129.5Q159,100,211,104.5Q263,109,333.5,106Q404,103,421.5,171.5Q439,240,404.5,294.5Z' /></svg>");
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+}
+
 #logoText {
     font-family: "Dancing Script", cursive;
     color: var(--default-yello);

@@ -19,7 +19,7 @@ $(document).ready(function () {
 
   $.get("http://localhost:8080/customer/all")
     .done(function (data) {
-      if (data.length === 0) {
+      if (data === undefined) {
         $(".detailsContainer").append(
           '<h3 style="text-align: center; color: #46CB8B; margin-top: 10px;">Nothing to Show</h3>'
         );
