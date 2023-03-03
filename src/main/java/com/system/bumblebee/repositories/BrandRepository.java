@@ -17,4 +17,5 @@ public interface BrandRepository extends JpaRepository<BrandEntity, Long> {
     void deleteById(Long id); // method to delete by id
     boolean existsById(Long id); // method to check if exist by id
     Optional<BrandEntity> findById(Long id); // method to find brand entity by id
+    long count(); // JPA method to count the number of entities in the table
 }

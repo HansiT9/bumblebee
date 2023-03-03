@@ -23,6 +23,11 @@ public class BrandController {
         this.brandService = brandService;
     }
 
+    @GetMapping("/count")
+    public long getBrandCount() {
+        return brandService.getBrandCount();
+    }
+
     // Define the GET mapping to validate the brand name
     @GetMapping("/name/validate")
     public ResponseEntity<?> validateBrandName(@RequestParam String brandName) {

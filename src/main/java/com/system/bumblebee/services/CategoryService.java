@@ -11,4 +11,5 @@ public interface CategoryService {
     boolean removeCategory(int id);
     List<CategoryEntity> fetchAllCategories();
     boolean updateCategoryNameById(Long id, Category category);
+    long getCategoryCount();
 }

@@ -60,4 +60,5 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
     @Transactional
     @Query("UPDATE ProductEntity p SET p.productCategoryName = :newCategoryName WHERE p.productCategoryName = :currentCategoryName")
     int updateCategoryNames(String currentCategoryName, String newCategoryName);
+    long count(); // JPA method to count the number of entities in the table
 }

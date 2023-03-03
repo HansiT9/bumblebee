@@ -96,4 +96,9 @@ public class CategoryController {
             return ResponseEntity.status(HttpStatus.OK).body("Something went wrong on our side");
         }
     }
+
+    @GetMapping("/count")
+    public long getBrandCount() {
+        return categoryService.getCategoryCount();
+    }
 }

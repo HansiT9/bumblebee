@@ -166,4 +166,9 @@ public class ProductController {
             return ResponseEntity.status(HttpStatus.OK).body("Something went wrong on our side");
         }
     }
+
+    @GetMapping("/count")
+    public long getBrandCount() {
+        return productService.getProductCount();
+    }
 }

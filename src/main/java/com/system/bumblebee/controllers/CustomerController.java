@@ -26,6 +26,12 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
+
+    @GetMapping("/count")
+    public long getCustomerCount() {
+        return customerService.getCustomerCount();
+    }
+
     // Endpoint to fetch all customer details
     @GetMapping("/all")
     public ResponseEntity<?> fetchAllCustomers() {

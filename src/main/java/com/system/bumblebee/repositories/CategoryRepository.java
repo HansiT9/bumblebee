@@ -15,4 +15,5 @@ public interface CategoryRepository extends JpaRepository<CategoryEntity, Long> 
     List<CategoryEntity> findAll(); // method to find all category entities
     void deleteById(Long id); // method to delete category entity by id
     boolean existsById(Long id); // method to check if category entity exist by id
+    long count(); // JPA method to count the number of entities in the table
 }

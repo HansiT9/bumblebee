@@ -8,4 +8,5 @@ import java.util.Optional;
 public interface CustomerService {
     List<CustomerEntity> fetchAllCustomers();
     Optional<CustomerEntity> fetchSingleCustomer(Long cusID);
+    long getCustomerCount();
 }

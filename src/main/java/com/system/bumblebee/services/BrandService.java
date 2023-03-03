@@ -11,4 +11,5 @@ public interface BrandService {
     List<BrandEntity> fetchAllBrands();
     boolean removeBrand(int id);
     boolean updateBrandNameById(Long id, Brand brand);
+    long getBrandCount();
 }

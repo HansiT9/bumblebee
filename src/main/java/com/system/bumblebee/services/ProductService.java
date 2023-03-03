@@ -19,4 +19,5 @@ public interface ProductService {
     boolean updateProductBrandNames(String currentBrandName, String newBrandName);
     boolean updateProductCategoryNames(String currentCategoryName, String newCategoryName);
     boolean updateProductNameById(Long id, Product product);
+    long getProductCount();
 }

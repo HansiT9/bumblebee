@@ -15,4 +15,6 @@ public interface CustomerRepository extends JpaRepository<CustomerEntity, Long> 
     CustomerEntity save(CustomerEntity customer); // method to save customer entity
     List<CustomerEntity> findAll(); // method to find all customer entities
     Optional<CustomerEntity> findById(Long cusID); // method to find customer entity by id
+    long count(); // JPA method to count the number of entities in the table
+    CustomerEntity findByNic(String nic); // method to find customer entity by nic
 }
