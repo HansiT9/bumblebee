@@ -96,3 +96,13 @@ main section {
     font-size: 4rem;
     margin-left: 10px;
 }
+
+.image {
+    z-index: 1;
+    position: absolute;
+    left: 15%;
+    top: 40%;
+    transform: rotate(70deg);
+    width: 250px;
+    height: 250px;
+}
