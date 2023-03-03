@@ -15,6 +15,8 @@ public class CustomerEntity {
     @Column
     private String dob;
     @Column
+    private String nic;
+    @Column
     private String email;
     @Column
     private String password;

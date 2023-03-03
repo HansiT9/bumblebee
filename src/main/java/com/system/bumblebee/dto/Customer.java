@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 public class Customer {
     private String customerFullName; // Define a private String field for customer full name
     private String Dob; // Define a private String field for date of birth
+    private String nic; // Define a Private String field for nic
     private String customerEmail; // Define a private String field for email
     private String password; // Define a private String field for password
     private String installmentPlan; // Define a private String field for installment plan
