@@ -25,6 +25,7 @@ $(document).ready(function () {
       console.log(data);
       $("#fName").text(data.fullName);
       $("#dob").text(data.dob);
+      $("#nic").text(data.nic);
 
       const f = new Intl.NumberFormat("si-LK", {
         currency: "LKR",
