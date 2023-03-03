@@ -46,7 +46,7 @@ nav {
 
 #userControl li a {
   text-decoration: none;
-  color: var(--default-links) !important;
+  color: black!important;
   font-weight: 600;
 }
 
