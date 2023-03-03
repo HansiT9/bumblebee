@@ -2,7 +2,9 @@
 package com.system.bumblebee.controllers;
 
 import com.system.bumblebee.entity.CustomerEntity;
+import com.system.bumblebee.factory.ServiceFactory;
 import com.system.bumblebee.services.CustomerService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,22 +21,26 @@ import java.util.Optional;
 public class CustomerController {
 
     // Inject the necessary services
-    private final CustomerService customerService;
+//    private final CustomerService customerService;
 
     // Constructor to inject the services
-    public CustomerController(CustomerService customerService) {
-        this.customerService = customerService;
-    }
+//    public CustomerController(CustomerService customerService) {
+//        this.customerService = customerService;
+//    }
 
+    @Autowired
+    private ServiceFactory factory;
 
     @GetMapping("/count")
     public long getCustomerCount() {
+        CustomerService customerService = factory.customerService();
         return customerService.getCustomerCount();
     }
 
     // Endpoint to fetch all customer details
     @GetMapping("/all")
     public ResponseEntity<?> fetchAllCustomers() {
+        CustomerService customerService = factory.customerService();
         // Call service to fetch all customer details
         List<CustomerEntity> customerDetails = customerService.fetchAllCustomers();
 
@@ -49,6 +55,7 @@ public class CustomerController {
     // Endpoint to fetch a single customer detail
     @GetMapping("/single")
     public ResponseEntity<?> fetchSingleCustomer(@RequestParam Long cusID) {
+        CustomerService customerService = factory.customerService();
         // Call service to fetch a single customer detail
         Optional<CustomerEntity> customerEntity = customerService.fetchSingleCustomer(cusID);
 

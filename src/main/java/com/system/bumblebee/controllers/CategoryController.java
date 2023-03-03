@@ -3,7 +3,9 @@ package com.system.bumblebee.controllers;
 
 import com.system.bumblebee.dto.Category;
 import com.system.bumblebee.entity.CategoryEntity;
+import com.system.bumblebee.factory.ServiceFactory;
 import com.system.bumblebee.services.CategoryService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,16 +17,20 @@ import java.util.List;
 @RequestMapping("/category")
 public class CategoryController {
     // Inject the necessary services
-    private final CategoryService categoryService;
+//    private final CategoryService categoryService;
 
     // Constructor to inject the services
-    public CategoryController(CategoryService categoryService) {
-        this.categoryService = categoryService;
-    }
+//    public CategoryController(CategoryService categoryService) {
+//        this.categoryService = categoryService;
+//    }
+
+    @Autowired
+    private ServiceFactory factory;
 
     // Define a GET endpoint to validate the category name
     @GetMapping("/name/validate")
     public ResponseEntity<?> validateCategoryName(@RequestParam String categoryName) {
+        CategoryService categoryService = factory.categoryService();
         // Check if the category name already exists
         boolean exists = categoryService.checkBrandNameExists(categoryName);
 
@@ -40,6 +46,7 @@ public class CategoryController {
     // Define a GET endpoint to fetch all categories
     @GetMapping("/all")
     public ResponseEntity<?> fetchAllCategories() {
+        CategoryService categoryService = factory.categoryService();
         // Fetch all categories from the category service
         List<CategoryEntity> category = categoryService.fetchAllCategories();
 
@@ -55,6 +62,7 @@ public class CategoryController {
     // Define a POST endpoint to create a new category
     @PostMapping("/new")
     public ResponseEntity<?> createCategory(@RequestBody Category category) {
+        CategoryService categoryService = factory.categoryService();
         // Save the new category using the category service
         boolean created = categoryService.saveCategory(category);
 
@@ -70,6 +78,7 @@ public class CategoryController {
     // Define a DELETE endpoint to remove a single category by ID
     @DeleteMapping("/remove/single/{id}")
     public ResponseEntity<?> removeAllWithCategoryId(@PathVariable String id) {
+        CategoryService categoryService = factory.categoryService();
         // Remove the category with the specified ID using the category service
         boolean deleted = categoryService.removeCategory(Integer.parseInt(id));
 
@@ -85,6 +94,7 @@ public class CategoryController {
     // Define a PUT endpoint to update a single category by ID
     @PutMapping("/update/single/{id}")
     public ResponseEntity<?> updateBrandNameById(@PathVariable Long id, @RequestBody Category category) {
+        CategoryService categoryService = factory.categoryService();
         // Update the category name for the specified ID using the category service
         boolean updatedCategory = categoryService.updateCategoryNameById(id, category);
 
@@ -99,6 +109,7 @@ public class CategoryController {
 
     @GetMapping("/count")
     public long getBrandCount() {
+        CategoryService categoryService = factory.categoryService();
         return categoryService.getCategoryCount();
     }
 }
