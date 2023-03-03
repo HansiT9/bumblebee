@@ -8,15 +8,17 @@ import com.system.bumblebee.repositories.AdminRepository;
 import com.system.bumblebee.repositories.CustomerRepository;
 import com.system.bumblebee.services.RegistrationService;
 import com.system.bumblebee.util.PasswordEncrypt;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class RegistrationServiceImpl implements RegistrationService {
+    private static final Logger logger = LoggerFactory.getLogger(RegistrationServiceImpl.class);
     // Injecting CustomerRepository bean
     @Autowired
     private CustomerRepository customerRepository;
-
     // Injecting AdminRepository bean
     @Autowired
     private AdminRepository adminRepository;
@@ -34,6 +36,14 @@ public class RegistrationServiceImpl implements RegistrationService {
 
         // If the customer was found, check if the email matches the given email and return the result
         return customerEntity.getEmail().equals(email);
+    }
+
+    // Check if an customer with the given nic exists in the database.
+    @Override
+    public boolean checkNicCustomer(String nic) {
+        CustomerEntity customerEntity = customerRepository.findByNic(nic);
+
+        return customerEntity != null;
     }
 
     // Check if an admin with the given email exists in the database.
@@ -75,6 +85,7 @@ public class RegistrationServiceImpl implements RegistrationService {
         // Set the customer information in the customer entity
         customerEntity.setFullName(customer.getCustomerFullName());
         customerEntity.setDob(customer.getDob());
+        customerEntity.setNic(customer.getNic());
         customerEntity.setEmail(customer.getCustomerEmail());
         customerEntity.setPassword(hashedPassword);
         customerEntity.setInstallmentPlan(customer.getInstallmentPlan());

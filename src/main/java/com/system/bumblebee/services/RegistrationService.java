@@ -9,4 +9,5 @@ public interface RegistrationService {
     boolean registerCustomer(Customer customer);
     boolean checkEmailAdmin(String email);
     boolean registerAdmin(Admin admin);
+    boolean checkNicCustomer(String nic);
 }

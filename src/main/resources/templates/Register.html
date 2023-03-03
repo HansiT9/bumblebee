@@ -50,9 +50,7 @@
           <!--    ////////////////////////////      -->
           <div id="formAdmin">
             <div class="form-group">
-              <label for="emailAdmin" id="adminEmailLabel"
-                >Admin Email:</label
-              >
+              <label for="emailAdmin" id="adminEmailLabel">Admin Email:</label>
               <input
                 class="form-control"
                 id="emailAdmin"
@@ -64,7 +62,8 @@
             </div>
             <div class="form-group">
               <label for="passwordAdmin" id="adminPasswordLabel"
-                >Admin Password:</label>
+                >Admin Password:</label
+              >
               <input
                 class="form-control"
                 id="passwordAdmin"
@@ -94,6 +93,17 @@
                 id="dob"
                 pattern="^(19|20)\d{2}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$"
                 placeholder="yyyy-mm-dd"
+                required
+                type="text"
+              />
+            </div>
+            <div class="form-group" id="nicGroup">
+              <label for="nic">Customer NIC:</label>
+              <input
+                class="form-control"
+                id="nic"
+                pattern="^([0-9]{9}[x|X|v|V]|[0-9]{12})$"
+                placeholder="Enter your NIC (e.g. 971234567V or 200012345678)"
                 required
                 type="text"
               />
@@ -146,6 +156,10 @@
       </section>
     </main>
     <!-- script to external js file -->
-    <script th:src="@{/js/Register.js}" type="text/javascript"></script>
+    <script
+      src="../static/js/Register.js"
+      th:src="@{/js/Register.js}"
+      type="text/javascript"
+    ></script>
   </body>
 </html>

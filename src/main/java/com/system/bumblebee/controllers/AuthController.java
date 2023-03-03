@@ -5,6 +5,8 @@ import com.system.bumblebee.dto.Admin;
 import com.system.bumblebee.dto.Customer;
 import com.system.bumblebee.services.AuthService;
 import com.system.bumblebee.services.RegistrationService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/auth")
 public class AuthController {
 
+    private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
     // Inject the necessary services
     private final AuthService authService; //
     private final RegistrationService registerService;
@@ -39,7 +42,7 @@ public class AuthController {
     }
 
     // Endpoint to handle email validation requests for admin users
-    @GetMapping("/admin/validate")
+    @GetMapping("/admin/email/validate")
     public ResponseEntity<?> validateEmailAdmin(@RequestParam String email) {
         // Check if the email is available for registration
         boolean isAvailable = registerService.checkEmailAdmin(email);
@@ -52,8 +55,20 @@ public class AuthController {
         }
     }
 
+    // Endpoint to handle nic validation requests for customer users
+    @GetMapping("/customer/nic/validate/{nic}")
+    public ResponseEntity<?> validateNicCustomer(@PathVariable String nic) {
+        boolean isAvailable = registerService.checkNicCustomer(nic);
+
+        if (!isAvailable) {
+            return ResponseEntity.status(HttpStatus.OK).body("Nic Available!");
+        } else {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Nic Already Exist!");
+        }
+    }
+
     // Endpoint to handle email validation requests for customer users
-    @GetMapping("/customer/validate")
+    @GetMapping("/customer/email/validate")
     public ResponseEntity<?> validateEmailCustomer(@RequestParam String email) {
         // Check if the email is available for registration
         boolean isAvailable = registerService.checkEmailCustomer(email);

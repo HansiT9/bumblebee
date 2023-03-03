@@ -5,7 +5,7 @@ $(document).ready(function () {
 
   // default view
   $("#formCustomer").hide();
-  $("#fullName, #dob, #email, #password").prop("required", false);
+  $("#fullName, #dob, #email, #password, #nic").prop("required", false);
   $("#emailAdmin, #passwordAdmin").prop("required", true);
   sessionStorage.setItem("type", "admin");
 
@@ -14,23 +14,15 @@ $(document).ready(function () {
     if ($(this).is(":checked")) {
       $("#formCustomer").show();
       $("#formAdmin").hide();
-      $("#fullName, #dob, #email, #password").prop("required", true);
+      $("#fullName, #dob, #email, #password, #nic").prop("required", true);
       $("#emailAdmin, #passwordAdmin").prop("required", false);
-      // $("#fullNameGroup, #dobGroup, #installment").show();
-      // $("#fullName, #dob").prop("disabled", false);
-      // $("#emailLabel").text("Customer Email:");
-      // $("#passwordLabel").text("Customer Password:");
 
       sessionStorage.setItem("type", "customer");
     } else {
       $("#formCustomer").hide();
       $("#formAdmin").show();
-      $("#fullName, #dob, #email, #password").prop("required", false);
+      $("#fullName, #dob, #email, #password, #nic").prop("required", false);
       $("#emailAdmin, #passwordAdmin").prop("required", true);
-      // $("#fullNameGroup, #dobGroup, #installment").hide();
-      // $("#fullName, #dob").prop("disabled", true);
-      // $("#emailLabel").text("Admin Email:");
-      // $("#passwordLabel").text("Admin Password:");
       sessionStorage.setItem("type", "admin");
     }
   });
@@ -45,7 +37,7 @@ $(document).ready(function () {
     timeoutIdEmail = setTimeout(function () {
       if (email !== "" && patternEmail.test(email)) {
         if (sessionStorage.getItem("type") === "customer") {
-          $.get("http://localhost:8080/auth/customer/validate", {
+          $.get("http://localhost:8080/auth/customer/email/validate", {
             email: email,
           })
             .done(function (data) {})
@@ -67,17 +59,39 @@ $(document).ready(function () {
     timeoutIdAdmin = setTimeout(function () {
       if (email !== "" && patternEmail.test(email)) {
         if (sessionStorage.getItem("type") === "admin") {
-          $.get("http://localhost:8080/auth/admin/validate", {
+          $.get("http://localhost:8080/auth/admin/email/validate", {
             email: email,
           })
             .done(function (data) {})
             .fail(function () {
-              alert("Email Already Exist!");
+              alert("Admin email Already Exist!");
               $("#emailAdmin").val("");
             });
         }
       }
-    });
+    }, 1000);
+  });
+
+  let timeOutNicCustomer;
+  $("#nic").on("input", function () {
+    const nic = $(this).val();
+    const patternId = /^([0-9]{9}[x|X|v|V]|[0-9]{12})$/;
+    clearTimeout(timeOutNicCustomer);
+    timeOutNicCustomer = setTimeout(function () {
+      if (nic !== "" && patternId.test(nic)) {
+        if (sessionStorage.getItem("type") === "customer") {
+          console.log(nic);
+          $.get("http://localhost:8080/auth/customer/nic/validate/" + nic)
+            .done(function (data) {
+              console.log(data);
+            })
+            .fail(function () {
+              alert("Nic Already Registered!");
+              $("#nic").val("");
+            });
+        }
+      }
+    }, 1000);
   });
 
   // by default the installment plan is hidden
@@ -100,8 +114,10 @@ $(document).ready(function () {
         // Check if the age is less than 18
         if (age < 18) {
           $("#installment").hide();
+          $("#nicGroup").hide();
         } else {
           $("#installment").show();
+          $("#nicGroup").show();
         }
       }
     }, 1000);
@@ -120,14 +136,18 @@ $("#form-reg").submit(function (event) {
     const dob = $("#dob").val();
     const email = $("#email").val();
     const password = $("#password").val();
+    let nic = $("#nic").val();
     let $checkedRadio = $("input[type=radio]:checked");
 
     let installmentPlan = $checkedRadio.attr("id");
     if (installmentPlan === undefined) {
       installmentPlan = "n/a";
     }
+    if (nic === undefined) {
+      nic = "n/a";
+    }
 
-    console.log("in customer register");
+    console.log("in customer register", nic);
 
     $.ajax({
       url: "http://localhost:8080/auth/customer/register",
@@ -135,6 +155,7 @@ $("#form-reg").submit(function (event) {
       data: JSON.stringify({
         customerFullName: fullName,
         dob,
+        nic,
         customerEmail: email,
         password,
         installmentPlan: installmentPlan,
