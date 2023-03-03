@@ -38,7 +38,7 @@ public class RegistrationServiceImpl implements RegistrationService {
         return customerEntity.getEmail().equals(email);
     }
 
-    // Check if an customer with the given nic exists in the database.
+    // Check if a customer with the given nic exists in the database.
     @Override
     public boolean checkNicCustomer(String nic) {
         CustomerEntity customerEntity = customerRepository.findByNic(nic);

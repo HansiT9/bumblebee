@@ -3,10 +3,12 @@ package com.system.bumblebee.controllers;
 
 import com.system.bumblebee.dto.Admin;
 import com.system.bumblebee.dto.Customer;
+import com.system.bumblebee.factory.ServiceFactory;
 import com.system.bumblebee.services.AuthService;
 import com.system.bumblebee.services.RegistrationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,18 +20,25 @@ public class AuthController {
 
     private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
     // Inject the necessary services
-    private final AuthService authService; //
-    private final RegistrationService registerService;
+//    private final AuthService authService; //
+//    private final RegistrationService registerService;
 
-    // Constructor to inject the services
-    public AuthController(AuthService authService, RegistrationService registerService) {
-        this.authService = authService;
-        this.registerService = registerService;
-    }
+    @Autowired
+    private ServiceFactory factory;
+
+//     Constructor to inject the services
+//    public AuthController(RegistrationService registerService) {
+//        this.authService = factory.authService();
+//        this.registerService = factory.registrationService();
+//    }
 
     // Endpoint to handle login requests for admin users
     @PostMapping("/admin/login")
     public ResponseEntity<?> loginAdmin(@RequestBody Admin admin) {
+        System.out.println(admin.toString());
+
+        AuthService authService = factory.authService();
+
         // Authenticate the admin user
         boolean authenticated = authService.authenticateAdmin(admin);
 
@@ -44,8 +53,13 @@ public class AuthController {
     // Endpoint to handle email validation requests for admin users
     @GetMapping("/admin/email/validate")
     public ResponseEntity<?> validateEmailAdmin(@RequestParam String email) {
+
+        RegistrationService registrationService = factory.registrationService();
+
         // Check if the email is available for registration
-        boolean isAvailable = registerService.checkEmailAdmin(email);
+        boolean isAvailable = registrationService.checkEmailAdmin(email);
+
+        logger.info("Is available " + isAvailable);
 
         // Check if the email is available and return a response
         if (!isAvailable) {
@@ -58,7 +72,9 @@ public class AuthController {
     // Endpoint to handle nic validation requests for customer users
     @GetMapping("/customer/nic/validate/{nic}")
     public ResponseEntity<?> validateNicCustomer(@PathVariable String nic) {
-        boolean isAvailable = registerService.checkNicCustomer(nic);
+        RegistrationService registrationService = factory.registrationService();
+
+        boolean isAvailable = registrationService.checkNicCustomer(nic);
 
         if (!isAvailable) {
             return ResponseEntity.status(HttpStatus.OK).body("Nic Available!");
@@ -70,8 +86,10 @@ public class AuthController {
     // Endpoint to handle email validation requests for customer users
     @GetMapping("/customer/email/validate")
     public ResponseEntity<?> validateEmailCustomer(@RequestParam String email) {
+        RegistrationService registrationService = factory.registrationService();
+
         // Check if the email is available for registration
-        boolean isAvailable = registerService.checkEmailCustomer(email);
+        boolean isAvailable = registrationService.checkEmailCustomer(email);
 
         // Check if the email is available and return a response
         if (!isAvailable) {
@@ -85,10 +103,12 @@ public class AuthController {
     @PostMapping("/customer/register")
     public ResponseEntity<?> registerCustomer(@RequestBody Customer customer) {
 
+        RegistrationService registrationService = factory.registrationService();
+
         System.out.println(customer.toString());
 
         // Register the Customer
-        boolean registered = registerService.registerCustomer(customer);
+        boolean registered = registrationService.registerCustomer(customer);
 
         // Check if the registered and return a response
         if (registered) {
@@ -101,11 +121,12 @@ public class AuthController {
     // Endpoint to handle register requests for admin users
     @PostMapping("/admin/register")
     public ResponseEntity<?> registerAdmin (@RequestBody Admin admin) {
+        RegistrationService registrationService = factory.registrationService();
 
         System.out.println(admin.toString());
 
         // Register the admin user
-        boolean registered = registerService.registerAdmin(admin);
+        boolean registered = registrationService.registerAdmin(admin);
 
         // Check if the registered and return a response
         if (registered) {
