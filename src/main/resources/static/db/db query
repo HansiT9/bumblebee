@@ -14,6 +14,7 @@ CREATE TABLE customer (
     id INT PRIMARY KEY AUTO_INCREMENT,
     full_name VARCHAR(255) NOT NULL,
     dob varchar(10) NOT NULL,
+    nic varchar(15) NOT NULL UNIQUE,
     email VARCHAR(255) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
     loan_balance DECIMAL(10,2) DEFAULT 0,
